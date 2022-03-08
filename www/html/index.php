@@ -28,11 +28,11 @@ $result = mysqli_query($link,$sql);
           <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Dropdown
           </a>
-          <ul class="dropdown-menu-dark" aria-labelledby="dropdownMenuLink-dark">
-    <li><a class="dropdown-item" href="#">Action</a></li>
-    <li><a class="dropdown-item" href="#">Another action</a></li>
-    <li><a class="dropdown-item" href="#">Something else here</a></li>
-  </ul>
+
+            <ul class="dropdown-menu-dark" aria-labelledby="dropdownMenuLink-dark">
+              <li><a class="dropdown-item" href="#">Ware</a></li>
+              <li><a class="dropdown-item" href="#">Anmeldung</a></li>
+            </ul>
         </li>
       </ul>
     </div>
