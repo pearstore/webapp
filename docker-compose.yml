@@ -5,7 +5,7 @@ services:
     image: pearshop-mariadb:10.6.5-focal
     container_name: pearshop_db
     ports:
-      - 3306:3306
+      - 8888:3306
     environment:
       MYSQL_ROOT_PASSWORD: donotusethisinphpcode!
       MYSQL_DATABASE: pearstore_database
