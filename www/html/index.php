@@ -24,15 +24,8 @@ $result = mysqli_query($link,$sql);
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
       <ul class="navbar-nav">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </a>
-
-            <ul class="dropdown-menu-dark" aria-labelledby="dropdownMenuLink-dark">
-              <li><a class="dropdown-item" href="#">Ware</a></li>
-              <li><a class="dropdown-item" href="#">Anmeldung</a></li>
-            </ul>
+        <li class="nav-item button">
+          <a href="" class="btn btn-primary btn-sm">Details</a>
         </li>
       </ul>
     </div>
