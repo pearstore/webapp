@@ -1,8 +1,7 @@
 <?php
 
 session_start();
-var_dump(session_id());
-print("<br/>");
+# var_dump(session_id());
 
 # var_dump($_POST);
 
@@ -14,7 +13,7 @@ function passwd_crypt ($password, $cost=11){
 }
 
 // Register User 
-if(isset($_POST['form_type']), $_POST['form_type'] == "user_register" && isset($_POST['vname']) && isset($_POST['nname']) && isset($_POST['mail']) && isset($_POST['passwd']) && isset($_POST['passwd2']) && isset($_POST['address']) && $_POST['passwd'] == $_POST['passwd2']){
+if(isset($_POST['form_type']) && $_POST['form_type'] == "user_register" && isset($_POST['vname']) && isset($_POST['nname']) && isset($_POST['mail']) && isset($_POST['passwd']) && isset($_POST['passwd2']) && isset($_POST['address']) && $_POST['passwd'] == $_POST['passwd2']){
     $sql = "INSERT INTO Kunde (Vorname, Nachname, Email, Passwort, Adresse, Ortid) VALUES (?,?,?,?,?,?);";
     $stmt = $link->prepare($sql);
     
@@ -29,7 +28,7 @@ if(isset($_POST['form_type']), $_POST['form_type'] == "user_register" && isset($
     $stmt->execute();
 }
 // Login User
-if(isset($_POST['form_type']), $_POST['form_type'] == "user_login" && isset($_POST['mail']) && isset($_POST['passwd'])){
+if(isset($_POST['form_type']) && $_POST['form_type'] == "user_login" && isset($_POST['mail']) && isset($_POST['passwd'])){
     // sql quary
     $sql = "SELECT KNR, Vorname, Nachname, Email FROM Kunde WHERE Email=? AND Passwort=?";
     $stmt = $link->prepare($sql);
@@ -58,10 +57,12 @@ if(isset($_POST['form_type']), $_POST['form_type'] == "user_login" && isset($_PO
 
         // querry 
         $stmt->bind_param("si", $sessionid, $knr);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        var_dump($result);
-        var_dump($result->fetch_array(MYSQLI_ASSOC));
+        $r = $stmt->execute();
+        if($r === True){
+            $isLogin = True;
+
+        }
+        var_dump($r);
     }
 }
 
