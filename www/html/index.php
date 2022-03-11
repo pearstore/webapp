@@ -21,8 +21,11 @@ $result = mysqli_query($link,$sql);
   <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Pearstore</a>
-
-
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            Warenkorb ()
+          </li>
+        </ul>
     </div>
   </nav>
   <br>
