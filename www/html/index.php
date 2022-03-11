@@ -25,7 +25,7 @@ $result = mysqli_query($link,$sql);
     <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
       <ul class="navbar-nav">
         <li class="nav-item button">
-          <a href="" class="btn btn-primary btn-sm">Details</a>
+          <a href="" class="btn btn-primary btn-sm">knop</a>
         </li>
       </ul>
     </div>
