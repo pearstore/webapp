@@ -12,11 +12,11 @@ function passwd_crypt ($password, $cost=11){
     return crypt($password,$param);
 }
 
-// Register User 
+// Register User
 if(isset($_POST['form_type']) && $_POST['form_type'] == "user_register" && isset($_POST['vname']) && isset($_POST['nname']) && isset($_POST['mail']) && isset($_POST['passwd']) && isset($_POST['passwd2']) && isset($_POST['address']) && $_POST['passwd'] == $_POST['passwd2']){
     $sql = "INSERT INTO Kunde (Vorname, Nachname, Email, Passwort, Adresse, Ortid) VALUES (?,?,?,?,?,?);";
     $stmt = $link->prepare($sql);
-    
+
     $vorname = $_POST['vname'];
     $nachname = $_POST['nname'];
     $email = $_POST['mail'];
@@ -37,16 +37,16 @@ if(isset($_POST['form_type']) && $_POST['form_type'] == "user_login" && isset($_
     $email = $_POST['mail'];
     $passwort = passwd_crypt($_POST['passwd']);
 
-    // querry 
+    // querry
     $stmt->bind_param("ss", $email, $passwort);
     $stmt->execute();
     $result = $stmt->get_result();
     var_dump($result);
-    
+
     $user = $result->fetch_array(MYSQLI_ASSOC);
     var_dump($user);
 
-    
+
     if($result->num_rows > 0 && $user['KNR']){
         $sql = "INSERT INTO Login (SessionId, Zeitstempel, KNR) VALUES (?, current_timestamp(), ?)";
         $stmt = $link->prepare($sql);
@@ -55,7 +55,7 @@ if(isset($_POST['form_type']) && $_POST['form_type'] == "user_login" && isset($_
         $sessionid = session_id();
         $knr = $user['KNR'];
 
-        // querry 
+        // querry
         $stmt->bind_param("si", $sessionid, $knr);
         $r = $stmt->execute();
         if($r === True){
@@ -86,22 +86,23 @@ $link->close();
             <div class="collapse navbar-collapse" id="navbarScroll">
                 <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/register.php">register</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropdown
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                      </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="#">Ware</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="#">Warenkorb</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="#">Bestellungen</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="#">Account</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="#">über uns</a>
+                          </li>
                 </ul>
                 <form class="d-flex">
                     <input class="form-control me-2" type="search" placeholder="Suche" aria-label="Search">
