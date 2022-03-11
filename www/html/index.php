@@ -19,11 +19,7 @@ $result = mysqli_query($link,$sql);
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Pearstore</a>
-    <button class="navbar-toggler" type="button"
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDarkbutton">
-      <ul class="navbar-nav">
-    </div>
+    
   </div>
 </nav>
   <br>
