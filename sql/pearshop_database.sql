@@ -38,7 +38,7 @@ CREATE TABLE Bestpos (
     FOREIGN KEY (BID) REFERENCES Bestellung(BID)
 );
 CREATE TABLE Login (
-    SessionId VARCHAR(256) PRIMARY KEY,
+    SessionId VARCHAR(40) PRIMARY KEY,
     Zeitstempel datetime NOT NULL,
     KNR INT NOT NULL,
     FOREIGN KEY (KNR) REFERENCES Kunde(KNR)
