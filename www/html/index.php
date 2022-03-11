@@ -22,7 +22,7 @@ $result = mysqli_query($link,$sql);
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Pearstore</a>
 
-      
+
     </div>
   </nav>
   <br>
@@ -38,6 +38,7 @@ $result = mysqli_query($link,$sql);
        </div>
     <?php }?>
    </div>
+   <br>
 </section>
 
 <script src="assets/js/bootsrap.bundle.js"></script>
