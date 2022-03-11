@@ -22,7 +22,7 @@ $result = mysqli_query($link,$sql);
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Pearstore</a>
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
+          <li class="nav-item" href="#">
             Warenkorb ()
           </li>
         </ul>
