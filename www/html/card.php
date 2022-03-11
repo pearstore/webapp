@@ -12,4 +12,5 @@
       <a href="" class="btn btn-primary btn-sm">Details</a>
       <a href="" class="btn btn-success btn-sm">Hinzufügen</a>
   </div>
+  <br>
 </div>
