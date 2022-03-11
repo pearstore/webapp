@@ -32,15 +32,16 @@ $result = mysqli_query($link,$sql);
         <li class="nav-item">
           <a class="nav-link" href="#">Link</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            weiteres
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Warenkorb</a></li>
-            <li><a class="dropdown-item" href="#">Bestellungen</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">über uns</a></li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#">Warenkorb</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Bestellungen</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">über uns</a>
+            </li>
           </ul>
         </li>
         <li class="nav-item">
