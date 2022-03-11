@@ -15,13 +15,14 @@ $result = mysqli_query($link,$sql);
   <link rel="stylesheet" href="assets/css/styles.css">
 
 </head>
+
+
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Pearstore</a>
-    
-  </div>
-</nav>
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Pearstore</a>
+    </div>
+  </nav>
   <br>
   <br>
     <div>
@@ -30,12 +31,11 @@ $result = mysqli_query($link,$sql);
 <section class="container" id="product">
    <div class="row">
      <?php while($row = mysqli_fetch_array($result)){?>
-     <div class="col">
-       <?php include 'card.php'?>
+       <div class="col">
+         <?php include 'card.php'?>
+       </div>
+    <?php }?>
    </div>
- <?php }?>
-  </div>
-
 </section>
 
 <script src="assets/js/bootsrap.bundle.js"></script>
