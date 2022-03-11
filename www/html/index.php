@@ -179,18 +179,9 @@ $result = mysqli_query($link,$sql);
   <br>
   <br>
     <div>
-    <h2>Top Produkte:</h2>
+    <h2>vorübergehend</h2>
  </div>
-<section class="container" id="product">
-   <div class="row">
-     <?php while($row = mysqli_fetch_array($result)){?>
-       <div class="col">
-         <?php include 'card.php'?>
-       </div>
-    <?php }?>
-   </div>
-   <br>
-</section>
+
 
 
 <script src="/assets/js/bootstrap.bundle.min.js"></script>
