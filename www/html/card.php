@@ -1,8 +1,7 @@
 <div class="card">
   <div class="card-titel"><?= $row['Name']?></div>
-  <img src="\assets\pictures\pexels-nana-dua-8622912.jpg" class="card-img-top">
-
-  <div class="card h-110">
+  <br>
+  <img src="\assets\pictures\pexels-nana-dua-8622912.jpg" width="250" height="200"  class="card h-20" class="card-img-top">
   <div class="card-body">
 
 <?= $row['Beschreibung'] ?>
