@@ -15,26 +15,44 @@ $result = mysqli_query($link,$sql);
   <link rel="stylesheet" href="assets/css/styles.css">
 
 </head>
+
+
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Pearstore</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+  <a class="navbar-brand" href="#">PearStore</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-      <ul class="navbar-nav">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </a>
-
-            <ul class="dropdown-menu-dark" aria-labelledby="dropdownMenuLink-dark">
-              <li><a class="dropdown-item" href="#">Ware</a></li>
-              <li><a class="dropdown-item" href="#">Anmeldung</a></li>
-            </ul>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Ware</a>
+        </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#">Warenkorb</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Bestellungen</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Account</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">über uns</a>
+            </li>
+          </ul>
+        </li>
+
       </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
     </div>
   </div>
 </nav>
@@ -46,12 +64,12 @@ $result = mysqli_query($link,$sql);
 <section class="container" id="product">
    <div class="row">
      <?php while($row = mysqli_fetch_array($result)){?>
-     <div class="col">
-       <?php include 'card.php'?>
+       <div class="col">
+         <?php include 'card.php'?>
+       </div>
+    <?php }?>
    </div>
- <?php }?>
-  </div>
-
+   <br>
 </section>
 
 <script src="assets/js/bootsrap.bundle.js"></script>
