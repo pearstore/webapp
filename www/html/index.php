@@ -192,6 +192,10 @@ $result = mysqli_query($link,$sql);
    <br>
 </section>
 
-<script src="assets/js/bootsrap.bundle.js"></script>
+
+<script src="/assets/js/bootstrap.bundle.min.js"></script>
+<script>
+    new bootstrap.Modal(document.getElementById('loginModal'));
+</script>
 </body>
 </html>
