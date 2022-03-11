@@ -40,6 +40,9 @@ $result = mysqli_query($link,$sql);
               <a class="nav-link" href="#">Bestellungen</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="#">Account</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="#">über uns</a>
             </li>
           </ul>
