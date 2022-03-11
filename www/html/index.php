@@ -18,7 +18,7 @@ $result = mysqli_query($link,$sql);
 
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Pearstore</a>
     </div>
