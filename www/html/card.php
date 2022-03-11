@@ -1,5 +1,6 @@
 <div class="card">
   <div class="card-titel"><?= $row['Name']?></div>
+  <hr>
   <img src="\assets\pictures\pexels-nana-dua-8622912.jpg"  class="card h-20" class="card-img-top">
   <div class="card-body">
 
