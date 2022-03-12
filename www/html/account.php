@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 # var_dump(session_id());
 
@@ -12,11 +11,11 @@ function passwd_crypt ($password, $cost=11){
     return crypt($password,$param);
 }
 
-// Register User
+// Register User 
 if(isset($_POST['form_type']) && $_POST['form_type'] == "user_register" && isset($_POST['vname']) && isset($_POST['nname']) && isset($_POST['mail']) && isset($_POST['passwd']) && isset($_POST['passwd2']) && isset($_POST['address']) && $_POST['passwd'] == $_POST['passwd2']){
     $sql = "INSERT INTO Kunde (Vorname, Nachname, Email, Passwort, Adresse, Ortid) VALUES (?,?,?,?,?,?);";
     $stmt = $link->prepare($sql);
-
+    
     $vorname = $_POST['vname'];
     $nachname = $_POST['nname'];
     $email = $_POST['mail'];
@@ -25,55 +24,96 @@ if(isset($_POST['form_type']) && $_POST['form_type'] == "user_register" && isset
     $ortid = 1;
 
     $stmt->bind_param("ssssss", $vorname, $nachname, $email, $passwort, $adresse, $ortid);
-    $stmt->execute();
+    $registerSuccess = $stmt->execute();
 }
-// Login User
-if(isset($_POST['form_type']) && $_POST['form_type'] == "user_login" && isset($_POST['mail']) && isset($_POST['passwd'])){
+
+function loginUser($db, $email, $passwort){
     // sql quary
     $sql = "SELECT KNR, Vorname, Nachname, Email FROM Kunde WHERE Email=? AND Passwort=?";
-    $stmt = $link->prepare($sql);
+    $stmt = $db->prepare($sql);
 
     // querry variablen
     $email = $_POST['mail'];
     $passwort = passwd_crypt($_POST['passwd']);
 
-    // querry
-    $stmt->bind_param("ss", $email, $passwort);
+    // querry 
+    $stmt->bind_param("ss", ...[$email, $passwort]);
     $stmt->execute();
     $result = $stmt->get_result();
-    var_dump($result);
-
+    
     $user = $result->fetch_array(MYSQLI_ASSOC);
-    var_dump($user);
-
-
+    
     if($result->num_rows > 0 && $user['KNR']){
         $sql = "INSERT INTO Login (SessionId, Zeitstempel, KNR) VALUES (?, current_timestamp(), ?)";
-        $stmt = $link->prepare($sql);
+        $stmt = $db->prepare($sql);
 
         // querry variablen
         $sessionid = session_id();
         $knr = $user['KNR'];
 
-        // querry
+        // querry 
         $stmt->bind_param("si", $sessionid, $knr);
-        $r = $stmt->execute();
-        if($r === True){
-            $isLogin = True;
-
+        if($stmt->execute()){
+            $_SESSION["userIsLogin"] = True; 
+            return True;
         }
-        var_dump($r);
+    }
+    return False;
+}
+
+// Login User
+if(isset($_POST['form_type']) && $_POST['form_type'] == "user_login" && isset($_POST['mail']) && isset($_POST['passwd'])){
+    $loginSuccess = loginUser($link, $_POST['mail'], $_POST['passwd']);
+}
+
+// Login User
+if(isset($_POST['form_type']) && $_POST['form_type'] == "user_logout"){
+    // sql quary
+    $sql = "DELETE FROM Login WHERE (SessionId = ?);";
+    $stmt = $link->prepare($sql);
+
+    // querry variablen
+    $sessionid = session_id();
+
+    // querry 
+    $stmt->bind_param("s", $sessionid);
+    $logoutSuccess = $stmt->execute();
+    $_SESSION["userIsLogin"] = False;
+    session_destroy();
+}
+
+$userIsLogin = False;
+if(isset($_SESSION['userIsLogin']) && $_SESSION["userIsLogin"] == True){
+    $sql = "SELECT K.KNR, K.Vorname, K.Nachname, K.Email, L.Zeitstempel FROM Kunde K JOIN Login L ON K.KNR = L.KNR WHERE L.SessionId = ?";
+    $stmt = $link->prepare($sql);
+
+    // querry variablen
+    $sessionid = session_id();
+
+    // querry 
+    $stmt->bind_param("s", $sessionid);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if($result->num_rows > 0){
+        $user = $result->fetch_array(MYSQLI_ASSOC);
+        $userIsLogin = True;
+    } else {
+        $_SESSION["userIsLogin"] = False;
+        session_destroy();
     }
 }
 
 $link->close();
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang="de">
 <head>
     <Title>Pearstore</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 </head>
 
 <body class="bg-white bg-gradient">
@@ -87,38 +127,90 @@ $link->close();
                 <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
-                      </li>
-                          <li class="nav-item">
-                            <a class="nav-link" href="#">Ware</a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link" href="#">Warenkorb</a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link" href="#">Bestellungen</a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link" href="#">Account</a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link" href="#">über uns</a>
-                          </li>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Ware</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Warenkorb</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Bestellungen</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Account</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">über uns</a>
+                    </li>
                 </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Suche" aria-label="Search">
-                    <button class="btn btn-outline-light" type="submit">Suche</button>
+                <form class="d-flex me-4">
+                    <input class="form-control me-2 bg-dark text-white" type="search" placeholder="Suche" aria-label="Search">
+                    <button class="btn btn-light" type="submit">Suche</button>
                 </form>
-            </div>
-            <div class="d-flex ms-5">
-                <button type="button" class="btn btn-outline-light mx-1" data-bs-toggle="modal" data-bs-target="#loginModal">
-                    Login
-                </button>
-                <button type="button" class="btn btn-light mx-1" data-bs-toggle="modal" data-bs-target="#registerModal">
-                    Register
-                </button>
+                <?php if($userIsLogin == False): ?>
+                    <button type="button" class="btn btn-outline-light mx-1" data-bs-toggle="modal" data-bs-target="#loginModal">
+                        Login
+                    </button>
+                    <button type="button" class="btn btn-light mx-1" data-bs-toggle="modal" data-bs-target="#registerModal">
+                        Register
+                    </button>
+                <?php elseif($userIsLogin == True): ?>
+                    <form method="post" class="flex-shrink-0 dropdown">
+                        <a href="#" class="d-block link-light text-decoration-none dropdown-toggle text-light" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="<?php echo("https://www.gravatar.com/avatar/" . md5( strtolower( trim( $user["Email"] ) ) ) . "?d=identicon&s=" . 32); ?>" class="border border-white border-1 rounded-circle" width="32" height="32">
+                        </a>
+                        <ul class="dropdown-menu text-small dropdown-menu-end dropdown-menu-dark bg-dark border-light" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="/account.php">Profil</a></li>
+                            <li><a class="dropdown-item" href="/orders.php">Bestellungen</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><button class="dropdown-item" type="submit" name="form_type" value="user_logout">Logout</button></li>
+                        </ul>
+                    </form>
+                <?php endif; ?>
             </div>
         </div>
     </nav>
+
+    <div class="container">
+        <?php if (isset($loginSuccess) && $loginSuccess == True): ?>
+            <div class="alert alert-success d-flex align-items-center mt-3" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                <div>Login Erfogreich!</div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php elseif (isset($loginSuccess) && $loginSuccess == False): ?>
+            <div class="alert alert-danger d-flex align-items-center mt-3" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                <div>Login fehlgeschlagen. Überprüfe deinen Benutzername oder Passwort!</div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php elseif (isset($registerSuccess) && $registerSuccess == True): ?>
+            <div class="alert alert-success d-flex align-items-center mt-3" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                <div>Registierung Erfogreich!</div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php elseif (isset($registerSuccess) && $registerSuccess == False): ?>
+            <div class="alert alert-danger d-flex align-items-center mt-3" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                <div>Registierung fehlgeschlagen. Überprüfe deine Angaben!</div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php elseif (isset($logoutSuccess) && $logoutSuccess == True): ?>
+            <div class="alert alert-success d-flex align-items-center mt-3" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                <div>Logout Erfogreich!</div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php elseif (isset($logoutSuccess) && $logoutSuccess == False): ?>
+            <div class="alert alert-danger d-flex align-items-center mt-3" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                <div>Logout fehlgeschlagen.</div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php endif; ?>
+    </div>
 
     <div class="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -232,48 +324,10 @@ $link->close();
         </div>
     </div>
 
-
-
     <div class="container">
-        <div class="card mt-5">
+        <div class="card mt-3">
             <div class="card-body">
-                <form class="row g-3" method="post">
-                    <div class="col-md-6">
-                        <label for="vname" class="form-label">Vorname</label>
-                        <input type="test" class="form-control" id="vname" name="vname">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="nname" class="form-label">Nachname</label>
-                        <input type="test" class="form-control" id="nnmae" name="nname">
-                    </div>
-                    <div class="col-md-12">
-                        <label for="mail" class="form-label">E-Mail</label>
-                        <input type="email" class="form-control" id="mail" name="mail">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="passwd" class="form-label">Passwort</label>
-                        <input type="password" class="form-control" id="passwd" name="passwd">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="passwd" class="form-label">Passwort (wiederholung)</label>
-                        <input type="password" class="form-control" id="passwd2" name="passwd2">
-                    </div>
-                    <div class="col-12">
-                        <label for="address" class="form-label">Adresse</label>
-                        <input type="text" class="form-control" id="address" name="address">
-                    </div>
-                    <div class="col-md-9">
-                        <label for="city" class="form-label">Ort</label>
-                        <input type="text" class="form-control" id="city" name="city">
-                    </div>
-                    <div class="col-md-3">
-                        <label for="zip" class="form-label">PLZ</label>
-                        <input type="text" class="form-control" id="zip" name="zip">
-                    </div>
-                    <div class="col-12">
-                        <button type="submit" class="btn btn-primary">Registrieren</button>
-                    </div>
-                </form>
+                
             </div>
         </div>
     </div>
