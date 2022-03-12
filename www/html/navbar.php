@@ -10,20 +10,14 @@ function passwd_crypt ($password, $cost=11){
     return crypt($password,$param);
 }
 
-// Register User 
-if(isset($_POST['form_type']) && $_POST['form_type'] == "user_register" && isset($_POST['vname']) && isset($_POST['nname']) && isset($_POST['mail']) && isset($_POST['passwd']) && isset($_POST['passwd2']) && isset($_POST['address']) && $_POST['passwd'] == $_POST['passwd2']){
-    $sql = "INSERT INTO Kunde (Vorname, Nachname, Email, Passwort, Adresse, Ortid) VALUES (?,?,?,?,?,?);";
-    $stmt = $link->prepare($sql);
+function registerUser($db, $vorname, $nachname, $email, $passwort, $adresse, $ort, $plz){
+    $sql = "INSERT INTO Kunde (Vorname, Nachname, Email, Passwort, Adresse, Ortid) VALUES (?,?,?,?,?,(SELECT OrtId FROM Ort WHERE PLZ = ?));";
+    $stmt = $db->prepare($sql);
     
-    $vorname = $_POST['vname'];
-    $nachname = $_POST['nname'];
-    $email = $_POST['mail'];
-    $passwort = passwd_crypt($_POST['passwd']);
-    $adresse = $_POST['address'];
-    $ortid = 1;
+    $passwort_hash = passwd_crypt($passwort);
 
-    $stmt->bind_param("ssssss", $vorname, $nachname, $email, $passwort, $adresse, $ortid);
-    $registerSuccess = $stmt->execute();
+    $stmt->bind_param("sssssi", $vorname, $nachname, $email, $passwort_hash, $adresse, $plz);
+    return $stmt->execute();
 }
 
 function loginUser($db, $email, $passwort){
@@ -60,16 +54,10 @@ function loginUser($db, $email, $passwort){
     return False;
 }
 
-// Login User
-if(isset($_POST['form_type']) && $_POST['form_type'] == "user_login" && isset($_POST['mail']) && isset($_POST['passwd'])){
-    $loginSuccess = loginUser($link, $_POST['mail'], $_POST['passwd']);
-}
-
-// Login User
-if(isset($_POST['form_type']) && $_POST['form_type'] == "user_logout"){
+function logoutUser($db){
     // sql quary
     $sql = "DELETE FROM Login WHERE (SessionId = ?);";
-    $stmt = $link->prepare($sql);
+    $stmt = $db->prepare($sql);
 
     // querry variablen
     $sessionid = session_id();
@@ -81,13 +69,14 @@ if(isset($_POST['form_type']) && $_POST['form_type'] == "user_logout"){
     session_destroy();
 }
 
-$userIsLogin = False;
-if(isset($_SESSION['userIsLogin']) && $_SESSION["userIsLogin"] == True){
-    $sql = "SELECT K.KNR, K.Vorname, K.Nachname, K.Email, L.Zeitstempel FROM Kunde K JOIN Login L ON K.KNR = L.KNR WHERE L.SessionId = ?";
-    $stmt = $link->prepare($sql);
+function getLoggedinUser($db, $sessionid){
+    $sql = "SELECT KNR FROM Login WHERE SessionId = ?";
+    $stmt = $db->prepare($sql);
+}
 
-    // querry variablen
-    $sessionid = session_id();
+function checkIfLogin($db, $sessionid){
+    $sql = "SELECT KNR FROM Login WHERE SessionId = ?";
+    $stmt = $db->prepare($sql);
 
     // querry 
     $stmt->bind_param("s", $sessionid);
@@ -97,10 +86,32 @@ if(isset($_SESSION['userIsLogin']) && $_SESSION["userIsLogin"] == True){
     if($result->num_rows > 0){
         $user = $result->fetch_array(MYSQLI_ASSOC);
         $userIsLogin = True;
+        return False;
     } else {
         $_SESSION["userIsLogin"] = False;
         session_destroy();
+        return False;
     }
+}
+
+// Register User 
+if(isset($_POST['form_type']) && $_POST['form_type'] == "user_register" && isset($_POST['vname']) && isset($_POST['nname']) && isset($_POST['mail']) && isset($_POST['passwd']) && isset($_POST['passwd2']) && isset($_POST['address']) && $_POST['passwd'] == $_POST['passwd2']){
+    $registerSuccess = registerUser($link, $_POST['vname'], $_POST['nname'], $_POST['mail'], $_POST['passwd'], $_POST['address'], $_POST['ort'], $_POST['zip']);
+}
+
+// Login User
+if(isset($_POST['form_type']) && $_POST['form_type'] == "user_login" && isset($_POST['mail']) && isset($_POST['passwd'])){
+    $loginSuccess = loginUser($link, $_POST['mail'], $_POST['passwd']);
+}
+
+// Logout User
+if(isset($_POST['form_type']) && $_POST['form_type'] == "user_logout"){
+    logoutUser($link);
+}
+
+$userIsLogin = False;
+if(isset($_SESSION['userIsLogin']) && $_SESSION["userIsLogin"] == True){
+    checkIfLogin($link, session_id());
 }
 
 $link->close();
@@ -295,8 +306,8 @@ $link->close();
                         <div class="col-md-9">
                             <div class="container-fluid">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control bg-dark text-light" id="city" name="city" placeholder="Ort">
-                                    <label for="city" class="form-label">Ort</label>
+                                    <input type="text" class="form-control bg-dark text-light" id="ort" name="ort" placeholder="Ort">
+                                    <label for="ort" class="form-label">Ort</label>
                                 </div>
                             </div>
                         </div>
