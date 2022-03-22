@@ -1,7 +1,4 @@
-<?php
-session_start();
-require_once('mysql.php');
-?>
+<?php require_once('function.php'); ?>
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -13,23 +10,8 @@ require_once('mysql.php');
 </head>
 
 <body class="bg-white bg-gradient">
-    <?php
-    /* get all user data */
-        $session_id = session_id();
-        $sql = "SELECT k.KNR, k.Vorname, k.Nachname, k.Email, k.Adresse, o.PLZ FROM Kunde as k JOIN Login as l ON k.KNR = l.KNR JOIN Ort as o ON k.Ortid = o.Ortid WHERE l.SessionId = ?;";
-        $stmt = $_MYSQL_CONNECTION->prepare($sql);
-
-        $stmt->bind_param("s", $session_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $USER = False;
-        if($result->num_rows > 0){
-            $USER = $result->fetch_array(MYSQLI_ASSOC);
-        }
-    /* include navbar */
-        require_once("navbar.php");
-    ?>
-    <div class="container">
+    <?php require_once("navbar.php"); ?>
+    <div class="container ">
         <div class="row">
             <div class="col-4">
                 <div class="card">
