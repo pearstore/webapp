@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+<?php require_once('function.php'); ?>
 <?php
 $link = mysqli_connect("pearshop_db","pearshop","itsstuttgart","pearstore_database");
 
