@@ -3,7 +3,8 @@
 # var_dump($_POST);
 # var_dump($_SESSION);
 
-$link = mysqli_connect("pearshop_db","pearshop","itsstuttgart","pearstore_database");
+require_once('mysql.php');
+
 function passwd_crypt ($password, $cost=11){
     $salt="CK6twagYBBYdDq/T3NxzvL";
     $param='$'.implode('$',array("2y", str_pad($cost,2,"0",STR_PAD_LEFT), $salt));
@@ -84,9 +85,9 @@ function checkIfLogin($db, $sessionid){
     $result = $stmt->get_result();
     
     if($result->num_rows > 0){
-        $user = $result->fetch_array(MYSQLI_ASSOC);
+        $_SESSION["userIsLogin"] = True;
         $userIsLogin = True;
-        return False;
+        return True;
     } else {
         $_SESSION["userIsLogin"] = False;
         session_destroy();
@@ -96,25 +97,25 @@ function checkIfLogin($db, $sessionid){
 
 // Register User 
 if(isset($_POST['form_type']) && $_POST['form_type'] == "user_register" && isset($_POST['vname']) && isset($_POST['nname']) && isset($_POST['mail']) && isset($_POST['passwd']) && isset($_POST['passwd2']) && isset($_POST['address']) && $_POST['passwd'] == $_POST['passwd2']){
-    $registerSuccess = registerUser($link, $_POST['vname'], $_POST['nname'], $_POST['mail'], $_POST['passwd'], $_POST['address'], $_POST['ort'], $_POST['zip']);
+    $registerSuccess = registerUser($_MYSQL_CONNECTION, $_POST['vname'], $_POST['nname'], $_POST['mail'], $_POST['passwd'], $_POST['address'], $_POST['ort'], $_POST['zip']);
 }
 
 // Login User
 if(isset($_POST['form_type']) && $_POST['form_type'] == "user_login" && isset($_POST['mail']) && isset($_POST['passwd'])){
-    $loginSuccess = loginUser($link, $_POST['mail'], $_POST['passwd']);
+    $loginSuccess = loginUser($_MYSQL_CONNECTION, $_POST['mail'], $_POST['passwd']);
 }
 
 // Logout User
 if(isset($_POST['form_type']) && $_POST['form_type'] == "user_logout"){
-    logoutUser($link);
+    logoutUser($_MYSQL_CONNECTION);
 }
 
 $userIsLogin = False;
 if(isset($_SESSION['userIsLogin']) && $_SESSION["userIsLogin"] == True){
-    checkIfLogin($link, session_id());
+    $userIsLogin = checkIfLogin($_MYSQL_CONNECTION, session_id());
 }
 
-$link->close();
+# $_MYSQL_CONNECTION->close();
 ?>
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
@@ -158,7 +159,7 @@ $link->close();
             <?php elseif($userIsLogin == True): ?>
                 <form method="post" class="flex-shrink-0 dropdown">
                     <a href="#" class="d-block link-light text-decoration-none dropdown-toggle text-light" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="<?php echo("https://www.gravatar.com/avatar/" . md5( strtolower( trim( $user["Email"] ) ) ) . "?d=identicon&s=" . 32); ?>" class="border border-white border-1 rounded-circle" width="32" height="32">
+                        <img src="<?php echo("https://www.gravatar.com/avatar/" . md5( strtolower( trim( $USER["Email"] ) ) ) . "?d=identicon&s=" . 32); ?>" class="border border-white border-1 rounded-circle" width="32" height="32">
                     </a>
                     <ul class="dropdown-menu text-small dropdown-menu-end dropdown-menu-dark bg-dark border-light" aria-labelledby="userDropdown">
                         <li><a class="dropdown-item" href="/account.php">Profil</a></li>

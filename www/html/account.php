@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once('mysql.php');
 ?>
 <!DOCTYPE html>
 <html lang="de">
@@ -12,19 +13,33 @@ session_start();
 </head>
 
 <body class="bg-white bg-gradient">
-    <?php require_once("navbar.php"); ?>
-    <?php var_dump($user); ?>
+    <?php
+    /* get all user data */
+        $session_id = session_id();
+        $sql = "SELECT k.KNR, k.Vorname, k.Nachname, k.Email, k.Adresse, o.PLZ FROM Kunde as k JOIN Login as l ON k.KNR = l.KNR JOIN Ort as o ON k.Ortid = o.Ortid WHERE l.SessionId = ?;";
+        $stmt = $_MYSQL_CONNECTION->prepare($sql);
+
+        $stmt->bind_param("s", $session_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $USER = False;
+        if($result->num_rows > 0){
+            $USER = $result->fetch_array(MYSQLI_ASSOC);
+        }
+    /* include navbar */
+        require_once("navbar.php");
+    ?>
     <div class="container">
         <div class="row">
             <div class="col-4">
                 <div class="card">
                     <div class="card-body row">
                         <div class="col-auto">
-                            <img class="border border-white border-1 rounded-circle" src="<?php echo("https://www.gravatar.com/avatar/" . md5( strtolower( trim( $user["Email"] ) ) ) . "?d=identicon&s=" . 48); ?>" width="48" height="48">
+                            <img class="border border-white border-1 rounded-circle" src="<?php echo("https://www.gravatar.com/avatar/" . md5( strtolower( trim( $USER["Email"] ) ) ) . "?d=identicon&s=" . 48); ?>" width="48" height="48">
                         </div>
                         <div class="col" >
-                            <h5 class="card-title"><?php print($user['Vorname'] . ' ' . $user['Nachname']); ?></h5>
-                            <h6 class="card-subtitle mb-2 text-muted"><?php print($user['Email']); ?></h6>
+                            <h5 class="card-title"><?php print($USER['Vorname'] . ' ' . $USER['Nachname']); ?></h5>
+                            <h6 class="card-subtitle mb-2 text-muted"><?php print($USER['Email']); ?></h6>
                         </div>
                     </div>
                 </div>
