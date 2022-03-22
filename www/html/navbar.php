@@ -32,14 +32,7 @@
                     <input class="form-control me-2 bg-dark text-white" type="search" placeholder="Suche" aria-label="Search">
                     <button class="btn btn-light" type="submit">Suche</button>
                 </form>
-                <?php if($USER == False): ?>
-                    <button type="button" class="btn btn-outline-light mx-1" data-bs-toggle="modal" data-bs-target="#loginModal">
-                        Login
-                    </button>
-                    <button type="button" class="btn btn-light mx-1" data-bs-toggle="modal" data-bs-target="#registerModal">
-                        Register
-                    </button>
-                <?php else: ?>
+                <?php if(isset($USER) && $USER != False): ?>
                     <form method="post" class="flex-shrink-0 dropdown">
                         <a href="#" class="d-block link-light text-decoration-none dropdown-toggle text-light" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="<?php echo("https://www.gravatar.com/avatar/" . md5( strtolower( trim( $USER["Email"] ) ) ) . "?d=identicon&s=" . 32); ?>" class="border border-white border-1 rounded-circle" width="32" height="32">
@@ -52,6 +45,13 @@
                             <li><button class="dropdown-item" type="submit" name="form_type" value="user_logout">Logout</button></li>
                         </ul>
                     </form>
+                <?php else: ?>
+                    <button type="button" class="btn btn-outline-light mx-1" data-bs-toggle="modal" data-bs-target="#loginModal">
+                        Login
+                    </button>
+                    <button type="button" class="btn btn-light mx-1" data-bs-toggle="modal" data-bs-target="#registerModal">
+                        Register
+                    </button>
                 <?php endif; ?>
             </div>
         </div>
