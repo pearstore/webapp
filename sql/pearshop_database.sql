@@ -14,7 +14,8 @@ CREATE TABLE Artikel (
 );
 CREATE TABLE Ort (
     OrtId INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    PLZ INT NOT NULL
+    PLZ INT NOT NULL,
+	Ort VARCHAR(32) NOT NULL
 );
 CREATE TABLE Kunde (
     KNR INT NOT NULL PRIMARY KEY AUTO_INCREMENT, Vorname VARCHAR(20) NOT NULL,
@@ -60,7 +61,7 @@ INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name) VALUES ((SELECT AArtid F
 INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "RAM"), 70,  '8GB Single Module',	'Kingston');
 
 # Ort
-INSERT INTO Ort (PLZ) VALUES (70565);
+INSERT INTO Ort (PLZ,Ort) VALUES (70565,"Stuttgart");
 
 # User
 INSERT INTO Kunde (Vorname, Nachname, Email, Passwort, Adresse, Ortid) VALUES ('Dennis', 'Just', 'dennis.just@its-stuttgart.de', '$2y$11$CK6twagYBBYdDq/T3Nxzv.7uuhLm5MnmteqY/jI6P3HwRXWweWz7i', 'Breitwiesenstraße 20-22', (SELECT OrtId FROM Ort WHERE PLZ = 70565));
