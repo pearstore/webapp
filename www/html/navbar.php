@@ -1,5 +1,5 @@
 
-<div class="container-fluid px-0 pb-4">
+<div class="container-fluid px-0 mb-5">
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
         <div class="container-fluid" id="navbarToggleExternalContent">
