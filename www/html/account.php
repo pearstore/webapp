@@ -22,13 +22,24 @@
         <?php else: ?>  
             <div class="col-4">
                     <div class="card">
-                        <div class="card-body row">
-                            <div class="col-auto">
-                                <img class="border border-white border-1 rounded-circle" src="<?php echo("https://www.gravatar.com/avatar/" . md5( strtolower( trim( $USER["Email"] ) ) ) . "?d=identicon&s=" . 48); ?>" width="48" height="48">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-auto">
+                                    <img class="border border-white border-1 rounded-circle" src="<?php echo("https://www.gravatar.com/avatar/" . md5( strtolower( trim( $USER["Email"] ) ) ) . "?d=identicon&s=" . 48); ?>" width="48" height="48">
+                                </div>
+                                <div class="col" >
+                                    <h5 class="card-title"><?php print($USER['Vorname'] . ' ' . $USER['Nachname']); ?></h5>
+                                    <h6 class="card-subtitle mb-2 text-muted"><?php print($USER['Email']); ?></h6>
+                                </div>
                             </div>
-                            <div class="col" >
-                                <h5 class="card-title"><?php print($USER['Vorname'] . ' ' . $USER['Nachname']); ?></h5>
-                                <h6 class="card-subtitle mb-2 text-muted"><?php print($USER['Email']); ?></h6>
+                            <div class="row">
+                                <div class="col-auto">
+                                    <div>Lieferadresse:</div>    
+                                    <address class="mb-0">
+                                        <?php print($USER['Adresse']);?><br>
+                                        <?php print($USER['PLZ'] . " " . $USER['Ort']);?><br>
+                                    </address>
+                                </div>
                             </div>
                         </div>
                     </div>
