@@ -11,12 +11,24 @@ function passwd_crypt ($password, $cost=11){
 
 function registerUser($vorname, $nachname, $email, $passwort, $adresse, $ort, $plz){
     global $_MYSQL_CONNECTION;
-    $sql = "INSERT INTO Kunde (Vorname, Nachname, Email, Passwort, Adresse, Ortid) VALUES (?,?,?,?,?,(SELECT OrtId FROM Ort WHERE PLZ = ?));";
+
+    $sql = "SELECT ortid FROM Ort WHERE Ort = ? AND PLZ = ?";
+    $stmt = $_MYSQL_CONNECTION->prepare($sql);
+    $stmt->bind_param("si", $ort, $plz);
+    $stmt->execute();
+    if($stmt->get_result()->num_rows == 0){
+        $sql = "INSERT INTO Ort (Ort, PLZ) VALUES (?, ?)";
+        $stmt = $_MYSQL_CONNECTION->prepare($sql);
+        $stmt->bind_param("si", $ort, $plz);
+        $stmt->execute();
+    }
+
+    $sql = "INSERT INTO Kunde (Vorname, Nachname, Email, Passwort, Adresse, Ortid) VALUES (?,?,?,?,?,(SELECT OrtId FROM Ort WHERE Ort = ? AND PLZ = ?));";
     $stmt = $_MYSQL_CONNECTION->prepare($sql);
     
     $passwort_hash = passwd_crypt($passwort);
 
-    $stmt->bind_param("sssssi", $vorname, $nachname, $email, $passwort_hash, $adresse, $plz);
+    $stmt->bind_param("ssssssi", $vorname, $nachname, $email, $passwort_hash, $adresse, $ort, $plz);
     return $stmt->execute();
 }
 
