@@ -10,7 +10,6 @@ CREATE TABLE Artikel (
     Preis INT NOT NULL,
     Beschreibung VARCHAR(280) NOT NULL,
     Name VARCHAR(40) NOT NULL,
-	Bild VARChAR(30), 
     FOREIGN KEY(AArtid) REFERENCES Artikel_Art (AArtid)
 );
 CREATE TABLE Ort (
