@@ -1,34 +1,45 @@
 <?php require_once('function.php'); ?>
 <?php
-$link = mysqli_connect("pearshop_db","pearshop","itsstuttgart","pearstore_database");
+if(!isset($_GET['name'])){
+    $sql = "SELECT Anr, AArtid, Preis, Name, Beschreibung FROM Artikel";
+    $stmt = $_MYSQL_CONNECTION->prepare($sql);
 
-$sql = "SELECT Anr, AArtid, Preis, Name, Beschreibung FROM Artikel";
+    $stmt->execute();
+    $result = $stmt->get_result();
+} else {
+    $sql = "SELECT Anr, AArtid, Preis, Name, Beschreibung FROM Artikel WHERE `Name` LIKE ?";
+    $stmt = $_MYSQL_CONNECTION->prepare($sql);
 
-$result = mysqli_query($link,$sql);
+    $name = "%".$_GET['name']."%";
+
+    $stmt->bind_param("s", $name);
+    $stmt->execute();
+    $result = $stmt->get_result();
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <Title>Pearstore</title>
+  <Title>Pearstore - ware</title>
   <meta charset="utf-8">
-  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/css/styles.css">
-
+    <link rel="icon" type="image/png" href="/assets/pictures/icon/icon.png">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 </head>
 
 
 <body>
     <?php require_once("navbar.php"); ?>
 
-
     <section class="container" id="product">
     <div class="row">
-        <?php while($row = mysqli_fetch_array($result)){?>
-        <div class="col-3">
-            <?php include 'card.php'?>
+        <?php while($row = $result->fetch_array(MYSQLI_ASSOC)): ?>
+        <div class="col-3 mb-4">
+            <?php include('card.php'); ?>
         </div>
-        <?php }?>
+        <?php endwhile; ?>
     </div>
     <br>
     </section>

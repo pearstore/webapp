@@ -97,6 +97,20 @@ function getUserbySession(){
     }
     return False;
 }
+function getArtikelByAnr(int $anr){
+    global $_MYSQL_CONNECTION;
+    $sql = "SELECT `Anr`, a.`AArtid`, `Preis`, `Beschreibung`, `Name`, aa.`AArt_Name` FROM `Artikel` as a JOIN `Artikel_Art` as aa ON aa.`AArtid` = a.`AArtid` WHERE `Anr` = ?;";
+    $stmt = $_MYSQL_CONNECTION->prepare($sql);
+    $session_id = session_id();
+
+    $stmt->bind_param("i", $anr);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if($result->num_rows > 0){
+        return $result->fetch_array(MYSQLI_ASSOC);
+    }
+    return False;
+}
 
 // Register User 
 if(isset($_POST['form_type']) && $_POST['form_type'] == "user_register" && isset($_POST['vname']) && isset($_POST['nname']) && isset($_POST['mail']) && isset($_POST['passwd']) && isset($_POST['passwd2']) && isset($_POST['address']) && $_POST['passwd'] == $_POST['passwd2']){
