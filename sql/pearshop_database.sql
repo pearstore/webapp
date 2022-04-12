@@ -66,6 +66,11 @@ INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name) VALUES ((Select AArtid F
 
 # Ort
 INSERT INTO Ort (PLZ,Ort) VALUES (70565,"Stuttgart");
+INSERT INTO Ort (PLZ,Ort) VALUES (71131,"Jettingen");
+
 
 # User
 INSERT INTO Kunde (Vorname, Nachname, Email, Passwort, Adresse, Ortid) VALUES ('Dennis', 'Just', 'dennis.just@its-stuttgart.de', '$2y$11$CK6twagYBBYdDq/T3Nxzv.7uuhLm5MnmteqY/jI6P3HwRXWweWz7i', 'Breitwiesenstra√üe 20-22', (SELECT OrtId FROM Ort WHERE PLZ = 70565));
+
+# User
+INSERT INTO Kunde (Vorname, Nachname, Email, Passwort, Adresse, Ortid) VALUES ('Nico', 'Flister', 'nico.flister@web.de', '$2y$11$CK6twagYBBYdDq/T3Nxzv.P6rGYOhuv0ITgBqOlxkSpSRZU1XBiqO', 'Hebelstraﬂe 1', (SELECT OrtId FROM Ort WHERE PLZ = 71131));
