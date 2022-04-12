@@ -59,6 +59,8 @@ INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name) VALUES ((SELECT AArtid F
 INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "GPU"), 1000, 'Dies ist eine GPU', 'Nvidia Geforce RTX3070Ti');
 INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "CPU"), 285, 'Dies ist eine CPU', 'Intel Core i7 9700k'); 
 INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "RAM"), 70,  '8GB Single Module',	'Kingston');
+INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name) VALUES ((SELECT AArtid FrOM Artikel_Art WHERE AArt_Name = "CPU"), 330, "Dies ist eine CPU", "AMD Ryzen 7 3700X");
+
 
 # Ort
 INSERT INTO Ort (PLZ,Ort) VALUES (70565,"Stuttgart");
