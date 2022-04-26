@@ -29,9 +29,8 @@
                             <img src="<?php echo("https://www.gravatar.com/avatar/" . md5( strtolower( trim( $USER["Email"] ) ) ) . "?d=identicon&s=" . 32); ?>" class="border border-white border-1 rounded-circle" width="32" height="32">
                         </a>
                         <ul class="dropdown-menu text-small dropdown-menu-end dropdown-menu-dark bg-dark border-light" aria-labelledby="userDropdown">
-                            <li><a class="dropdown-item" href="/account.php">Profil</a></li>
                             <li><a class="dropdown-item" href="/warenkorb.php">Warenkorb</a></li>
-                            <li><a class="dropdown-item" href="#">Bestellungen</a></li>
+                            <li><a class="dropdown-item" href="/account.php">Bestellungen</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><button class="dropdown-item" type="submit" name="form_type" value="user_logout">Logout</button></li>
                         </ul>
