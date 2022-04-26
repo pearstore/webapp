@@ -1,7 +1,7 @@
-<?php require_once('_function.php'); ?>
-<?php
+<?php 
 
 session_start();
+require_once('_function.php');
 
 $_MYSQL_CONNECTION = mysqli_connect("pearshop_db","pearshop","itsstuttgart","pearstore_database");
 

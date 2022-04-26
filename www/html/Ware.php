@@ -1,6 +1,8 @@
-<?php require_once('_function.php'); ?>
-<?php require_once('_global.php'); ?>
 <?php
+
+require_once('_function.php');
+require_once('_global.php');
+
 if(!isset($_GET['name'])){
     $sql = "SELECT Anr, AArtid, Preis, Name, Beschreibung FROM Artikel";
     $stmt = $_MYSQL_CONNECTION->prepare($sql);

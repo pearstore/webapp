@@ -1,5 +1,7 @@
-<?php require_once('_function.php'); ?>
-<?php require_once('_global.php'); ?>
+<?php
+require_once('_function.php');
+require_once('_global.php');
+?>
 <!DOCTYPE html>
 <html lang="de">
 <head>

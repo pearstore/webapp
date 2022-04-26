@@ -1,6 +1,7 @@
-<?php require_once('_function.php'); ?>
-<?php require_once('_global.php'); ?>
 <?php
+
+require_once('_function.php');
+require_once('_global.php');
 
 $warenkorb = [];
 if(isset($_COOKIE['warenkorb'])) {
