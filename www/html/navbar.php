@@ -13,10 +13,10 @@
                         <a class="nav-link active" aria-current="page" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/Ware.php">Ware</a>
+                        <a class="nav-link" href="/Ware.php">Ware</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">über uns</a>
+                        <a class="nav-link" href="#">über uns</a>
                     </li>
                 </ul>
                 <form action="/ware.php" method="get" class="d-flex me-4">
