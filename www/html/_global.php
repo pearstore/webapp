@@ -20,6 +20,6 @@ if(isset($_POST['form_type']) && $_POST['form_type'] == "user_logout"){
     logoutUser();
 }
 
-$USER = getUserbySession();
+$_USER = getUserbySession();
 
 ?>

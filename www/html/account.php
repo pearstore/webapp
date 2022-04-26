@@ -17,7 +17,7 @@ require_once('_global.php');
     <?php require_once("navbar.php"); ?>
     <div class="container">
         <div class="row">
-            <?php if($USER == False): ?>
+            <?php if($_USER == False): ?>
                 <div class="alert alert-danger d-flex align-items-center pt-2" role="alert">
                     <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
                     <div>Bitte anmelden!</div>
@@ -28,19 +28,19 @@ require_once('_global.php');
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-auto">
-                                    <img class="border border-white border-1 rounded-circle" src="<?php echo("https://www.gravatar.com/avatar/" . md5( strtolower( trim( $USER["Email"] ) ) ) . "?d=identicon&s=" . 48); ?>" width="48" height="48">
+                                    <img class="border border-white border-1 rounded-circle" src="<?php echo("https://www.gravatar.com/avatar/" . md5( strtolower( trim( $_USER["Email"] ) ) ) . "?d=identicon&s=" . 48); ?>" width="48" height="48">
                                 </div>
                                 <div class="col" >
-                                    <h5 class="card-title"><?php print($USER['Vorname'] . ' ' . $USER['Nachname']); ?></h5>
-                                    <h6 class="card-subtitle mb-2 text-muted"><?php print($USER['Email']); ?></h6>
+                                    <h5 class="card-title"><?php print($_USER['Vorname'] . ' ' . $_USER['Nachname']); ?></h5>
+                                    <h6 class="card-subtitle mb-2 text-muted"><?php print($_USER['Email']); ?></h6>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-auto">
                                     <div>Lieferadresse:</div>    
                                     <address class="mb-0">
-                                        <?php print($USER['Adresse']);?><br>
-                                        <?php print($USER['PLZ'] . " " . $USER['Ort']);?><br>
+                                        <?php print($_USER['Adresse']);?><br>
+                                        <?php print($_USER['PLZ'] . " " . $_USER['Ort']);?><br>
                                     </address>
                                 </div>
                             </div>

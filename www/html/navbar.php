@@ -23,10 +23,10 @@
                     <input class="form-control me-2 bg-dark text-white" name="name" type="search" placeholder="Suche" aria-label="Search">
                     <button class="btn btn-light" type="submit">Suche</button>
                 </form>
-                <?php if(isset($USER) && $USER != False): ?>
+                <?php if(isset($_USER) && $_USER != False): ?>
                     <form method="post" class="flex-shrink-0 dropdown">
                         <a href="#" class="d-block link-light text-decoration-none dropdown-toggle text-light" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="<?php echo("https://www.gravatar.com/avatar/" . md5( strtolower( trim( $USER["Email"] ) ) ) . "?d=identicon&s=" . 32); ?>" class="border border-white border-1 rounded-circle" width="32" height="32">
+                            <img src="<?php echo("https://www.gravatar.com/avatar/" . md5( strtolower( trim( $_USER["Email"] ) ) ) . "?d=identicon&s=" . 32); ?>" class="border border-white border-1 rounded-circle" width="32" height="32">
                         </a>
                         <ul class="dropdown-menu text-small dropdown-menu-end dropdown-menu-dark bg-dark border-light" aria-labelledby="userDropdown">
                             <li><a class="dropdown-item" href="/account.php">Profil</a></li>
