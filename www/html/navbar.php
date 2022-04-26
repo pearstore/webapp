@@ -15,9 +15,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/Ware.php">Ware</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">über uns</a>
-                    </li>
                 </ul>
                 <form action="/ware.php" method="get" class="d-flex me-4">
                     <input class="form-control me-2 bg-dark text-white" name="name" type="search" placeholder="Suche" aria-label="Search">
@@ -30,7 +27,7 @@
                         </a>
                         <ul class="dropdown-menu text-small dropdown-menu-end dropdown-menu-dark bg-dark border-light" aria-labelledby="userDropdown">
                             <li><a class="dropdown-item" href="/warenkorb.php">Warenkorb</a></li>
-                            <li><a class="dropdown-item" href="/account.php">Bestellungen</a></li>
+                            <li><a class="dropdown-item" href="/account.php">Info</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><button class="dropdown-item" type="submit" name="form_type" value="user_logout">Logout</button></li>
                         </ul>
