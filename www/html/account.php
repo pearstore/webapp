@@ -19,7 +19,7 @@
                 <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
                 <div>Bitte anmelden!</div>
             </div>
-        <?php else: ?>  
+        <?php else: ?>
             <div class="col-4">
                     <div class="card">
                         <div class="card-body">
@@ -34,12 +34,15 @@
                             </div>
                             <div class="row">
                                 <div class="col-auto">
-                                    <div>Lieferadresse:</div>    
+                                    <div>Lieferadresse:</div>
                                     <address class="mb-0">
                                         <?php print($USER['Adresse']);?><br>
                                         <?php print($USER['PLZ'] . " " . $USER['Ort']);?><br>
                                     </address>
                                 </div>
+                            </div>
+                            <div class="card-body p-4">
+                                <a href="#" class="btn btn-primary">account einstellung</a>
                             </div>
                         </div>
                     </div>
