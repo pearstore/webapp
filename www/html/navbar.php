@@ -3,7 +3,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
         <div class="container-fluid" id="navbarToggleExternalContent">
-            <a class="navbar-brand" href="#">PearStore</a>
+            <a class="navbar-brand" href="/">PearStore</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -16,7 +16,7 @@
                         <a class="nav-link" href="/Ware.php">Ware</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">über uns</a>
+                        <a class="nav-link" href="/ueber_uns.php">über uns</a>
                     </li>
                 </ul>
                 <form action="/ware.php" method="get" class="d-flex me-4">
