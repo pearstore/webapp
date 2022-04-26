@@ -32,7 +32,9 @@ if(!isset($_GET['name'])){
 
 <body>
     <?php require_once("navbar.php"); ?>
-
+    <li class="nav-item">
+        <a class="nav-link active" href="/Ware.php">Ware</a>
+    </li>
     <section class="container" id="product">
     <div class="row">
         <?php while($row = $result->fetch_array(MYSQLI_ASSOC)): ?>
@@ -43,7 +45,7 @@ if(!isset($_GET['name'])){
     </div>
     <br>
     </section>
-    
+
     <script src="/assets/js/bootstrap.bundle.min.js"></script>
     <script>
         new bootstrap.Modal(document.getElementById('loginModal'));
