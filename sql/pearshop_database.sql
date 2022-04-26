@@ -63,6 +63,7 @@ INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name) VALUES ((SELECT AArtid F
 INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "CPU"), 330, "Dies ist eine CPU", "AMD Ryzen 7 3700X");
 INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name) VALUES ((Select AArtid FROM Artikel_Art WHERE AArt_Name = "GPU"), 3000, "Dies ist eine Goldene GPU", "Nvidia Titan RTX");
 INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name) VALUES ((Select AArtid FROM Artikel_Art WHERE AArt_Name = "GPU"), 3000, "Dies ist eine Extrem Goldene GPU", "Nvidia Titan V");
+INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name) VALUES ((Select AArtid FROM Artikel_Art WHERE AArt_Name = "GPU"), 6072, "Des ist eine Shiny GPU", "Nvidia Quadro RTX 8000");
 
 
 # Ort
