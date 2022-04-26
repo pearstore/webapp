@@ -1,4 +1,5 @@
-<?php require_once('function.php'); ?>
+<?php require_once('_function.php'); ?>
+<?php require_once('_global.php'); ?>
 <?php
 
 $warenkorb = [];

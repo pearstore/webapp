@@ -1,8 +1,9 @@
-<?php require_once('function.php'); ?>
+<?php require_once('_function.php'); ?>
+<?php require_once('_global.php'); ?>
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <Title>Pearstore - account</title>
+    <title>Pearstore - account</title>
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="/assets/pictures/icon/icon.png">
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
@@ -14,13 +15,13 @@
     <?php require_once("navbar.php"); ?>
     <div class="container">
         <div class="row">
-        <?php if($USER == False): ?>
-            <div class="alert alert-danger d-flex align-items-center pt-2" role="alert">
-                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                <div>Bitte anmelden!</div>
-            </div>
-        <?php else: ?>  
-            <div class="col-4">
+            <?php if($USER == False): ?>
+                <div class="alert alert-danger d-flex align-items-center pt-2" role="alert">
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                    <div>Bitte anmelden!</div>
+                </div>
+            <?php else: ?>  
+                <div class="col-4">
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
@@ -88,13 +89,13 @@
                             </tbody>
                         </table>
                         <div class="card-body p-4">
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                            <!--p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a-->
                         </div>
                     </div>
                 </div>
-            </div>
-        <?php endif; ?>
+            <?php endif; ?>
+        </div>
     </div>
     <script src="/assets/js/bootstrap.bundle.min.js"></script>
     <script>
