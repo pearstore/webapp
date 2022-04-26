@@ -42,9 +42,9 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card-body p-4">
-                        <a href="#" class="btn btn-primary">account einstellung</a>
+                        <div class="card-body p-4">
+                            <a href="#" class="btn btn-primary">account einstellung</a>
+                        </div>
                     </div>
                 </div>
                 <div class="col-8">
