@@ -76,11 +76,6 @@ INSERT INTO Ort (PLZ,Ort) VALUES (70439,"Stuttgart");
 
 
 # User Temporary
-INSERT INTO Kunde (Vorname, Nachname, Email, Passwort, Adresse, Ortid) VALUES ('Dennis', 'Just', 'dennis.just@its-stuttgart.de', '$2y$11$CK6twagYBBYdDq/T3Nxzv.7uuhLm5MnmteqY/jI6P3HwRXWweWz7i', 'Breitwiesenstraße 20-22', (SELECT OrtId FROM Ort WHERE PLZ = 70565));
-<<<<<<< HEAD
-INSERT INTO Kunde (Vorname, Nachname, Email, Passwort, Adresse, Ortid) VALUES ('Nico', 'Flister', 'nico.flister@web.de', '$2y$11$CK6twagYBBYdDq/T3Nxzv.P6rGYOhuv0ITgBqOlxkSpSRZU1XBiqO', 'Hebelstra�e 1', (SELECT OrtId FROM Ort WHERE PLZ = 71131));
-INSERT INTO Kunde (Vorname, Nachname, Email, Passwort, Adresse, Ortid) VALUES ('Binyam', 'Tefera', 'test@test.de', '$2y$11$CK6twagYBBYdDq/T3Nxzv.7uuhLm5MnmteqY/jI6P3HwRXWweWz7i', 'Breitwiesenstraße 20-22', (SELECT OrtId FROM Ort WHERE PLZ = 70439));
-=======
-INSERT INTO Kunde (Vorname, Nachname, Email, Passwort, Adresse, Ortid) VALUES ('Nico', 'Flister', 'nico.flister@web.de', '$2y$11$CK6twagYBBYdDq/T3Nxzv.P6rGYOhuv0ITgBqOlxkSpSRZU1XBiqO', 'Hebelstra�e 1', (SELECT OrtId FROM Ort WHERE PLZ = 71131));
-INSERT INTO Kunde (Vorname, Nachname, Email, Passwort, Adresse, Ortid) VALUES ('Binyam', 'Tefera', 'binyam@tefera.de', '$2y$11$CK6twagYBBYdDq/T3Nxzv.7uuhLm5MnmteqY/jI6P3HwRXWweWz7i', 'Breitwiesenstraße 20-22', (SELECT OrtId FROM Ort WHERE PLZ = 70439));
->>>>>>> a36032b3624029928811dc244195046cc1f2003c
+INSERT INTO Kunde (Vorname, Nachname, Email, Passwort, Adresse, Ortid) VALUES ('Dennis', 'Just', 'dennis.just@its-stuttgart.de', '$2y$11$CK6twagYBBYdDq/T3Nxzv.7uuhLm5MnmteqY/jI6P3HwRXWweWz7i', 'BreitwiesenstraÃŸe 20-22', (SELECT OrtId FROM Ort WHERE PLZ = 70565));
+INSERT INTO Kunde (Vorname, Nachname, Email, Passwort, Adresse, Ortid) VALUES ('Nico', 'Flister', 'nico.flister@web.de', '$2y$11$CK6twagYBBYdDq/T3Nxzv.P6rGYOhuv0ITgBqOlxkSpSRZU1XBiqO', 'Hebelstraße 1', (SELECT OrtId FROM Ort WHERE PLZ = 71131));
+INSERT INTO Kunde (Vorname, Nachname, Email, Passwort, Adresse, Ortid) VALUES ('Binyam', 'Tefera', 'binyam@tefera.de', '$2y$11$CK6twagYBBYdDq/T3Nxzv.7uuhLm5MnmteqY/jI6P3HwRXWweWz7i', 'BreitwiesenstraÃŸe 20-22', (SELECT OrtId FROM Ort WHERE PLZ = 70439));
