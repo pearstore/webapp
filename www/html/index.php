@@ -24,7 +24,7 @@ $result = mysqli_query($link,$sql);
 <body>
     <?php require_once("navbar.php"); ?>
     <div>
-        <h2>vorübergehend</h2>
+        <h2>Willkommen bei Pear</h2>
     </div>
     <script src="/assets/js/bootstrap.bundle.min.js"></script>
     <script>
