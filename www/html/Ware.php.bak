@@ -5,11 +5,11 @@ require_once('_global.php');
 
 if(!isset($_GET['name'])){
     $result = mysql_select(
-        "SELECT Anr, AArtid, Preis, `Name`, Beschreibung, Menge FROM Artikel;"
+        "SELECT Anr, AArtid, Preis, `Name`, Beschreibung FROM Artikel;"
     );
 } else {
     $result = mysql_select(
-        "SELECT Anr, AArtid, Preis, `Name`, Beschreibung, Menge FROM Artikel WHERE `Name` LIKE ?;",
+        "SELECT Anr, AArtid, Preis, `Name`, Beschreibung FROM Artikel WHERE `Name` LIKE ?;",
         "s",
         ["%".$_GET['name']."%"]
     );
