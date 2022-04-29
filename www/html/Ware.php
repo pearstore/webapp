@@ -5,7 +5,7 @@ require_once('_global.php');
 
 if(!isset($_GET['name'])){
     $result = mysql_select(
-        "SELECT Anr, AArtid, Preis, `Name`, Beschreibung FROM Artikel;"
+        "SELECT Anr, AArtid, Preis, `Name`, Beschreibung FROM Artikel order by Preis;"
     );
 } else {
     $result = mysql_select(
