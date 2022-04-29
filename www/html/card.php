@@ -10,6 +10,10 @@
     <a href="/warenkorb.php" class="btn btn-primary btn-sm">Details</a>  
     <input type="hidden" name="anr" value="<?= $row['Anr']?>">
     <input type="hidden" name="add" value="1">
+<<<<<<< Updated upstream
     <button class="btn btn-success btn-sm">Hinzufügen</button>
+=======
+    <button class="btn btn-success btn-sm">Hinzufügen<i class="fas fa-shopping-cart"></i></button>
+>>>>>>> Stashed changes
   </form>
 </div>
