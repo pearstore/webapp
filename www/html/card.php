@@ -5,6 +5,7 @@
   <ul class="list-group list-group-flush">
     <li class="list-group-item"><?= $row['Beschreibung'] ?></li>
     <li class="list-group-item"><?= number_format($row['Preis'], 2, ',', ' ') ?> €</li>
+	<li class="list-group-item">Menge <?= $row['Menge'] ?></li>
   </ul>
   <form action="warenkorb.php" method="get" class="card-footer">
     <a href="/warenkorb.php" class="btn btn-primary btn-sm">Details</a>
