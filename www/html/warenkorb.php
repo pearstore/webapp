@@ -1,5 +1,7 @@
-<?php require_once('function.php'); ?>
 <?php
+
+require_once('_function.php');
+require_once('_global.php');
 
 $warenkorb = [];
 if(isset($_COOKIE['warenkorb'])) {
@@ -49,7 +51,7 @@ foreach($warenkorb as $anr => $count){
     <?php require_once("navbar.php"); ?>
     <div class="container">
         <div class="row">
-            <?php if($USER == False): ?>
+            <?php if($_USER == False): ?>
                 <div class="alert alert-danger d-flex align-items-center pt-2" role="alert">
                     <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
                     <div>Bitte anmelden!</div>

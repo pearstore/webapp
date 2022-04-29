@@ -1,4 +1,5 @@
 @echo off
 docker-compose down
-docker-compose up --build --force-recreate
+docker-compose build --force-rm
+docker-compose up --force-recreate
 docker-compose down
