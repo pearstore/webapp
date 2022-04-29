@@ -4,20 +4,15 @@ require_once('_function.php');
 require_once('_global.php');
 
 if(!isset($_GET['name'])){
-    $sql = "SELECT Anr, AArtid, Preis, Name, Beschreibung FROM Artikel";
-    $stmt = $_MYSQL_CONNECTION->prepare($sql);
-
-    $stmt->execute();
-    $result = $stmt->get_result();
+    $result = mysql_select(
+        "SELECT Anr, AArtid, Preis, `Name`, Beschreibung FROM Artikel;"
+    );
 } else {
-    $sql = "SELECT Anr, AArtid, Preis, Name, Beschreibung FROM Artikel WHERE `Name` LIKE ?";
-    $stmt = $_MYSQL_CONNECTION->prepare($sql);
-
-    $name = "%".$_GET['name']."%";
-
-    $stmt->bind_param("s", $name);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    $result = mysql_select(
+        "SELECT Anr, AArtid, Preis, `Name`, Beschreibung FROM Artikel WHERE `Name` LIKE ?;",
+        "s",
+        ["%".$_GET['name']."%"]
+    );
 }
 ?>
 

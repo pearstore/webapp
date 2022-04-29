@@ -1,5 +1,21 @@
 <?php
 
+
+function mysql_select(string $quary, string $var_types = NULL, array $var_array = NULL): mysqli_result|false {
+    global $_DEBUG;
+    $_MYSQL_CONNECTION = mysqli_connect("pearshop_db","pearshop","itsstuttgart","pearstore_database");
+    $stmt = $_MYSQL_CONNECTION->prepare($quary);
+
+    if($var_types != NULL && $var_array != NULL){
+        $stmt->bind_param($var_types, ...$var_array);
+    }
+
+    if($stmt->execute()){
+        return $stmt->get_result();
+    } else {
+        return false;
+    }
+}
 function passwd_crypt ($password, $cost=11){
     /* funktion zum hashen von Passwörtern*/
     $salt="CK6twagYBBYdDq/T3NxzvL";
@@ -43,35 +59,32 @@ function registerUser(string $vorname, string $nachname, string $email,
 }
 
 function loginUser($email, $passwort){
-    /* Einloggen der Nutzers */
+    /* Einloggen des Nutzers */
     global $_MYSQL_CONNECTION;
-    
-    // Nutzer anhand der E-Mail und des Passworts auslesen
-    // sql quary
-    $sql = "SELECT KNR, Vorname, Nachname, Email FROM Kunde WHERE Email=? AND Passwort=?";
-    $stmt = $_MYSQL_CONNECTION->prepare($sql);
+
     // querry variablen
     $email = $_POST['mail'];
     $passwort = passwd_crypt($_POST['passwd']); // Passwort wird gehasht damit es mit dem hash der datenbank vergilchen werden kann
-    // querry 
-    $stmt->bind_param("ss", ...[$email, $passwort]);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    
+
+    $result = mysql_select(
+        "SELECT KNR, Vorname, Nachname, Email FROM Kunde WHERE Email=? AND Passwort=?;",
+        "ss", array($email, $passwort)
+    );
     $user = $result->fetch_array(MYSQLI_ASSOC);
     
     // Wenn der nutzer 
     if($result->num_rows > 0 && $user['KNR']){
-        $sql = "INSERT INTO Login (SessionId, Zeitstempel, KNR) VALUES (?, current_timestamp(), ?)";
-        $stmt = $_MYSQL_CONNECTION->prepare($sql);
+        // $sql = "INSERT INTO Login (SessionId, Zeitstempel, KNR) VALUES (?, current_timestamp(), ?)";
+        // $stmt = $_MYSQL_CONNECTION->prepare($sql);
 
         // querry variablen
         $sessionid = session_id();
         $knr = $user['KNR'];
 
-        // querry 
-        $stmt->bind_param("si", $sessionid, $knr);
-        if($stmt->execute()){
+        // // querry 
+        // $stmt->bind_param("si", $sessionid, $knr);
+        
+        if(mysql_select("INSERT INTO Login (SessionId, Zeitstempel, KNR) VALUES (?, current_timestamp(), ?);", "si", [$sessionid, $knr])){
             $_SESSION["userIsLogin"] = True; 
             return True;
         }
@@ -81,29 +94,35 @@ function loginUser($email, $passwort){
 
 function logoutUser(){
     global $_MYSQL_CONNECTION;
-    // sql quary
-    $sql = "DELETE FROM Login WHERE (SessionId = ?);";
-    $stmt = $_MYSQL_CONNECTION->prepare($sql);
+    // // sql quary
+    // $sql = "DELETE FROM Login WHERE (SessionId = ?);";
+    // $stmt = $_MYSQL_CONNECTION->prepare($sql);
 
     // querry variablen
     $sessionid = session_id();
 
-    // querry 
-    $stmt->bind_param("s", $sessionid);
-    $logoutSuccess = $stmt->execute();
+    // // querry 
+    // $stmt->bind_param("s", $sessionid);
+    // $logoutSuccess = $stmt->execute();
+
+    mysql_select("DELETE FROM Login WHERE (SessionId = ?);", "s", [$sessionid]);
+
     $_SESSION["userIsLogin"] = False;
     session_destroy();
 }
 
 function getUserbySession(){
     global $_MYSQL_CONNECTION;
-    $sql = "SELECT k.KNR, k.Vorname, k.Nachname, k.Email, k.Adresse, o.PLZ, o.Ort FROM Kunde as k JOIN Login as l ON k.KNR = l.KNR JOIN Ort as o ON k.Ortid = o.Ortid WHERE l.SessionId = ?;";
-    $stmt = $_MYSQL_CONNECTION->prepare($sql);
+    // $sql = "SELECT k.KNR, k.Vorname, k.Nachname, k.Email, k.Adresse, o.PLZ, o.Ort FROM Kunde as k JOIN Login as l ON k.KNR = l.KNR JOIN Ort as o ON k.Ortid = o.Ortid WHERE l.SessionId = ?;";
+    // $stmt = $_MYSQL_CONNECTION->prepare($sql);
     $session_id = session_id();
 
-    $stmt->bind_param("s", $session_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    // $stmt->bind_param("s", $session_id);
+    // $stmt->execute();
+    // $result = $stmt->get_result();
+    $result = mysql_select("SELECT k.KNR, k.Vorname, k.Nachname, k.Email, k.Adresse, o.PLZ, o.Ort FROM Kunde as k JOIN Login as l ON k.KNR = l.KNR JOIN Ort as o ON k.Ortid = o.Ortid WHERE l.SessionId = ?;",
+        "s", [$session_id]
+    );
     if($result->num_rows > 0){
         return $result->fetch_array(MYSQLI_ASSOC);
     }

@@ -22,4 +22,6 @@ if(isset($_POST['form_type']) && $_POST['form_type'] == "user_logout"){
 
 $_USER = getUserbySession();
 
+$_MYSQL_CONNECTION
+
 ?>
