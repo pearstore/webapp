@@ -53,6 +53,7 @@ INSERT INTO Artikel_Art (AArt_Name) VALUES ('GPU');
 INSERT INTO Artikel_Art (AArt_Name) VALUES ('RAM');
 
 # Einfuegen von Artikeln
+<<<<<<< Updated upstream
 INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "CPU"), 99.99, 'Dies ist eine CPU', 'Intel Core i5 8600k', 50);
 INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "GPU"), 249.99, 'Dies ist eine GPU', 'Nvidia Geforce GTX1050Ti', 55);
 INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "CPU"), 399.99, 'Dies ist eine CPU', 'Intel Core i7 7700k', 20);
@@ -67,6 +68,22 @@ INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((Select A
 INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((Select AArtid FROM Artikel_Art WHERE AArt_Name = "GPU"), 2999.99, "Dies ist eine Extrem Goldene GPU", "Nvidia Titan V", 3);
 INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((Select AArtid FROM Artikel_Art WHERE AArt_Name = "GPU"), 6071.99, "Dies ist eine Shiny GPU", "Nvidia Quadro RTX 8000", 2);
 INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((Select AArtid FROM Artikel_Art WHERE AArt_Name = "GPU"), 949.99, "Dies ist eine GPU", "AMD Radeon Rx 6800", 9);
+=======
+INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "CPU"), 100, 'Dies ist eine CPU', 'Intel Core i5 8600k', 50);
+INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "GPU"), 250, 'Dies ist eine GPU', 'Nvidia Geforce GTX1050Ti', 55);
+INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "CPU"), 400, 'Dies ist eine CPU', 'Intel Core i7 7700k', 20); 
+INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "GPU"), 800, 'Dies ist eine GPU', 'Nvidia Geforce GTX1080Ti', 10);
+INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "CPU"), 150, 'Dies ist eine CPU', 'Intel Core i3 8100k', 5); 
+INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "GPU"), 780, 'Dies ist eine GPU', 'Nvidia Geforce RTX3070Ti', 7);
+INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "CPU"), 285, 'Dies ist eine CPU', 'Intel Core i7 9700k', 10); 
+INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "RAM"), 70,  '8GB Single Module',	'Kingston', 60);
+INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "CPU"), 330, "Dies ist eine CPU", "AMD Ryzen 7 3700X", 50);
+INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((Select AArtid FROM Artikel_Art WHERE AArt_Name = "GPU"), 3000, "Dies ist eine Goldene GPU", "Nvidia Titan RTX", 10);
+INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((Select AArtid FROM Artikel_Art WHERE AArt_Name = "GPU"), 3000, "Dies ist eine Extrem Goldene GPU", "Nvidia Titan V", 3);
+INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((Select AArtid FROM Artikel_Art WHERE AArt_Name = "GPU"), 6072, "Dies ist eine Shiny GPU", "Nvidia Quadro RTX 8000", 2);
+INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((Select AArtid FROM Artikel_Art WHERE AArt_Name = "GPU"), 950, "Dies ist eine GPU", "AMD Radeon Rx 6800", 9);
+INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "RAM"), 1284.99,  128GB PowerEdge C6520 C-Serie Arbeitsspeicher - RAM 2933MHz, ECC, 60);
+>>>>>>> Stashed changes
 
 # Ort
 INSERT INTO Ort (PLZ,Ort) VALUES (70565,"Stuttgart");
