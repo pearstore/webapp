@@ -4,16 +4,14 @@
   <!--div class="card-body mb-auto"></div-->
   <ul class="list-group list-group-flush">
     <li class="list-group-item"><?= $row['Beschreibung'] ?></li>
-    <li class="list-group-item"><?= number_format($row['Preis'], 2, ',', ' ') ?> €</li> 
+    <li class="list-group-item"><?= number_format($row['Preis'], 2, ',', ' ') ?> €</li>
   </ul>
   <form action="warenkorb.php" method="get" class="card-footer">
-    <a href="/warenkorb.php" class="btn btn-primary btn-sm">Details</a>  
+    <a href="/warenkorb.php" class="btn btn-primary btn-sm">Details</a>
     <input type="hidden" name="anr" value="<?= $row['Anr']?>">
     <input type="hidden" name="add" value="1">
-<<<<<<< Updated upstream
+
     <button class="btn btn-success btn-sm">Hinzufügen</button>
-=======
-    <button class="btn btn-success btn-sm">Hinzufügen<i class="fas fa-shopping-cart"></i></button>
->>>>>>> Stashed changes
+
   </form>
 </div>
