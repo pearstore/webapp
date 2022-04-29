@@ -37,13 +37,16 @@ require_once('_global.php');
                             </div>
                             <div class="row">
                                 <div class="col-auto">
-                                    <div>Lieferadresse:</div>    
+                                    <div>Lieferadresse:</div>
                                     <address class="mb-0">
                                         <?php print($_USER['Adresse']);?><br>
                                         <?php print($_USER['PLZ'] . " " . $_USER['Ort']);?><br>
                                     </address>
                                 </div>
                             </div>
+                        </div>
+                        <div class="card-body p-4">
+                            <a href="#" class="btn btn-primary">account einstellung</a>
                         </div>
                     </div>
                 </div>

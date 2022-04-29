@@ -41,7 +41,7 @@ if(!isset($_GET['name'])){
     </div>
     <br>
     </section>
-    
+
     <script src="/assets/js/bootstrap.bundle.min.js"></script>
     <script>
         new bootstrap.Modal(document.getElementById('loginModal'));

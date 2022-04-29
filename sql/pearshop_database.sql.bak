@@ -10,7 +10,7 @@ CREATE TABLE Artikel (
     Preis INT NOT NULL,
     Beschreibung VARCHAR(280) NOT NULL,
     Name VARCHAR(40) NOT NULL,
-	Menge INT NOT NULL,
+	Menge INT,
     FOREIGN KEY(AArtid) REFERENCES Artikel_Art (AArtid)
 );
 CREATE TABLE Ort (
@@ -19,7 +19,8 @@ CREATE TABLE Ort (
 	Ort VARCHAR(32) NOT NULL
 );
 CREATE TABLE Kunde (
-    KNR INT NOT NULL PRIMARY KEY AUTO_INCREMENT, Vorname VARCHAR(20) NOT NULL,
+    KNR INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    Vorname VARCHAR(20) NOT NULL,
     Nachname VARCHAR(30) NOT NULL,
     Email VARCHAR(40) NOT NULL,
     Passwort VARCHAR(64) NOT NULL,
@@ -55,16 +56,28 @@ INSERT INTO Artikel_Art (AArt_Name) VALUES ('RAM');
 INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "CPU"), 100, 'Dies ist eine CPU', 'Intel Core i5 8600k');
 INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "GPU"), 250, 'Dies ist eine GPU', 'Nvidia Geforce GTX1050Ti');
 INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "CPU"), 400, 'Dies ist eine CPU', 'Intel Core i7 7700k'); 
-INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "GPU"), 1200, 'Dies ist eine GPU', 'Nvidia Geforce GTX1080Ti');
+INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "GPU"), 800, 'Dies ist eine GPU', 'Nvidia Geforce GTX1080Ti');
 INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "CPU"), 150, 'Dies ist eine CPU', 'Intel Core i3 8100k'); 
-INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "GPU"), 1000, 'Dies ist eine GPU', 'Nvidia Geforce RTX3070Ti');
+INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "GPU"), 780, 'Dies ist eine GPU', 'Nvidia Geforce RTX3070Ti');
 INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "CPU"), 285, 'Dies ist eine CPU', 'Intel Core i7 9700k'); 
 INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "RAM"), 70,  '8GB Single Module',	'Kingston');
-INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name) VALUES ((SELECT AArtid FrOM Artikel_Art WHERE AArt_Name = "CPU"), 330, "Dies ist eine CPU", "AMD Ryzen 7 3700X");
-
+INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "CPU"), 330, "Dies ist eine CPU", "AMD Ryzen 7 3700X");
+INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name) VALUES ((Select AArtid FROM Artikel_Art WHERE AArt_Name = "GPU"), 3000, "Dies ist eine Goldene GPU", "Nvidia Titan RTX");
+INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name) VALUES ((Select AArtid FROM Artikel_Art WHERE AArt_Name = "GPU"), 3000, "Dies ist eine Extrem Goldene GPU", "Nvidia Titan V");
+INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name) VALUES ((Select AArtid FROM Artikel_Art WHERE AArt_Name = "GPU"), 6072, "Dies ist eine Shiny GPU", "Nvidia Quadro RTX 8000");
+INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name) VALUES ((Select AArtid FROM Artikel_Art WHERE AArt_Name = "GPU"), 950, "Dies ist eine GPU", "AMD Radeon Rx 6800");
 
 # Ort
 INSERT INTO Ort (PLZ,Ort) VALUES (70565,"Stuttgart");
+INSERT INTO Ort (PLZ,Ort) VALUES (71131,"Jettingen");
+INSERT INTO Ort (PLZ,Ort) VALUES (70439,"test");
+
+
 
 # User
 INSERT INTO Kunde (Vorname, Nachname, Email, Passwort, Adresse, Ortid) VALUES ('Dennis', 'Just', 'dennis.just@its-stuttgart.de', '$2y$11$CK6twagYBBYdDq/T3Nxzv.7uuhLm5MnmteqY/jI6P3HwRXWweWz7i', 'Breitwiesenstraße 20-22', (SELECT OrtId FROM Ort WHERE PLZ = 70565));
+
+# User
+INSERT INTO Kunde (Vorname, Nachname, Email, Passwort, Adresse, Ortid) VALUES ('Nico', 'Flister', 'nico.flister@web.de', '$2y$11$CK6twagYBBYdDq/T3Nxzv.P6rGYOhuv0ITgBqOlxkSpSRZU1XBiqO', 'Hebelstra�e 1', (SELECT OrtId FROM Ort WHERE PLZ = 71131));
+
+INSERT INTO Kunde (Vorname, Nachname, Email, Passwort, Adresse, Ortid) VALUES ('Binyam', 'Tefera', 'test@test.de', '$2y$11$CK6twagYBBYdDq/T3Nxzv.7uuhLm5MnmteqY/jI6P3HwRXWweWz7i', 'Breitwiesenstraße 20-22', (SELECT OrtId FROM Ort WHERE PLZ = 70439));

@@ -79,7 +79,9 @@ foreach($warenkorb as $anr => $count){
                                 <th scope="row"><?= $pos+1 ?></th>
                                 <td><?= $artikel['Anr'] ?></td>
                                 <td><?= $artikel['Name'] ?></td>
-                                <td class="text-end"><?= $artikel['count'] ?></td>
+                                <td class="text-end">
+                                  <input type="number" id="tentacles" name="tentacles"
+                                  min="1" max="10" value="<?= $artikel['count'] ?>"></td>
                                 <td class="text-end"><?= number_format($artikel['Preis'], 2, ',', ' ') ?> €</td>
                                 <td class="text-end"><?= number_format(($artikel['Preis'] * $artikel['count']), 2, ',', ' ') ?> €</td>
                             </tr>
@@ -99,7 +101,7 @@ foreach($warenkorb as $anr => $count){
             <?php endif; ?>
         </div>
     </div>
-    
+
     <script src="/assets/js/bootstrap.bundle.min.js"></script>
     <script>
         new bootstrap.Modal(document.getElementById('loginModal'));
