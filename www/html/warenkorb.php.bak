@@ -16,7 +16,10 @@ if(isset($_GET['anr'])) {
     }
     if(isset($_GET['add'])) {
         $add = (int) $_GET['add'];
-		if($warenkorb[$anr] + $add <= $artikel["Menge"]){
+		print($warenkorb[$anr] + $add);
+		print(" - ");
+		print($artikel["Menge"]);
+		if($warenkorb[$anr] + $add >= $artikel["Menge"]){
           $warenkorb[$anr] = $warenkorb[$anr] + $add;
 		}
 		
