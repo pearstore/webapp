@@ -18,10 +18,11 @@ CREATE TABLE Ort (
     PLZ INT NOT NULL,
 	Ort VARCHAR(32) NOT NULL
 );
-CREATE TABLE Kunde (
-    KNR INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE Benutzer (
+    BNR INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     Vorname VARCHAR(20) NOT NULL,
     Nachname VARCHAR(30) NOT NULL,
+	Typ INT NOT NULL DEFAULT 0,
     Email VARCHAR(40) NOT NULL,
     Passwort VARCHAR(64) NOT NULL,
     Adresse VARCHAR(80) NOT NULL,
@@ -30,8 +31,8 @@ CREATE TABLE Kunde (
 );
 CREATE TABLE Bestellung (
     BID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    KNR INT NOT NULL,
-    FOREIGN KEY (KNR) REFERENCES Kunde(KNR)
+    BNR INT NOT NULL,
+    FOREIGN KEY (BNR) REFERENCES Benutzer(BNR)
 );
 CREATE TABLE Bestpos (
     BestNr INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -43,8 +44,8 @@ CREATE TABLE Bestpos (
 CREATE TABLE Login (
     SessionId VARCHAR(40) PRIMARY KEY,
     Zeitstempel datetime NOT NULL,
-    KNR INT NOT NULL,
-    FOREIGN KEY (KNR) REFERENCES Kunde(KNR)
+    BNR INT NOT NULL,
+    FOREIGN KEY (BNR) REFERENCES Benutzer(BNR)
 );
 
 # Einfuegen von Artikel Arten
@@ -77,6 +78,6 @@ INSERT INTO Ort (PLZ,Ort) VALUES (70439,"Stuttgart");
 
 
 # User Temporary
-INSERT INTO Kunde (Vorname, Nachname, Email, Passwort, Adresse, Ortid) VALUES ('Dennis', 'Just', 'dennis.just@its-stuttgart.de', '$2y$11$CK6twagYBBYdDq/T3Nxzv.7uuhLm5MnmteqY/jI6P3HwRXWweWz7i', 'BreitwiesenstraÃŸe 20-22', (SELECT OrtId FROM Ort WHERE PLZ = 70565));
-INSERT INTO Kunde (Vorname, Nachname, Email, Passwort, Adresse, Ortid) VALUES ('Nico', 'Flister', 'nico.flister@web.de', '$2y$11$CK6twagYBBYdDq/T3Nxzv.P6rGYOhuv0ITgBqOlxkSpSRZU1XBiqO', 'Hebelstraße 1', (SELECT OrtId FROM Ort WHERE PLZ = 71131));
-INSERT INTO Kunde (Vorname, Nachname, Email, Passwort, Adresse, Ortid) VALUES ('Binyam', 'Tefera', 'binyam@tefera.de', '$2y$11$CK6twagYBBYdDq/T3Nxzv.7uuhLm5MnmteqY/jI6P3HwRXWweWz7i', 'BreitwiesenstraÃŸe 20-22', (SELECT OrtId FROM Ort WHERE PLZ = 70439));
+INSERT INTO Benutzer (Vorname, Nachname, Email, Passwort, Adresse, Ortid, Typ) VALUES ('Dennis', 'Just', 'dennis.just@its-stuttgart.de', '$2y$11$CK6twagYBBYdDq/T3Nxzv.7uuhLm5MnmteqY/jI6P3HwRXWweWz7i', 'BreitwiesenstraÃŸe 20-22', (SELECT OrtId FROM Ort WHERE PLZ = 70565), 3);
+INSERT INTO Benutzer (Vorname, Nachname, Email, Passwort, Adresse, Ortid, Typ) VALUES ('Nico', 'Flister', 'nico.flister@web.de', '$2y$11$CK6twagYBBYdDq/T3Nxzv.P6rGYOhuv0ITgBqOlxkSpSRZU1XBiqO', 'Hebelstraße 1', (SELECT OrtId FROM Ort WHERE PLZ = 71131),0);
+INSERT INTO Benutzer (Vorname, Nachname, Email, Passwort, Adresse, Ortid, Typ) VALUES ('Binyam', 'Tefera', 'binyam@tefera.de', '$2y$11$CK6twagYBBYdDq/T3Nxzv.7uuhLm5MnmteqY/jI6P3HwRXWweWz7i', 'BreitwiesenstraÃŸe 20-22', (SELECT OrtId FROM Ort WHERE PLZ = 70439), 0);
