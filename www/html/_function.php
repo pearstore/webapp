@@ -56,7 +56,7 @@ function registerUser(string $vorname, string $nachname, string $email,
 
     // Nutzer in der Datenbank abfragen
     return mysql_select(
-        "INSERT INTO Kunde (Vorname, Nachname, Email, Passwort, Adresse, Ortid) VALUES (?,?,?,?,?,(SELECT OrtId FROM Ort WHERE Ort = ? AND PLZ = ?));",
+        "INSERT INTO Benutzer (Vorname, Nachname, Email, Passwort, Adresse, Ortid) VALUES (?,?,?,?,?,(SELECT OrtId FROM Ort WHERE Ort = ? AND PLZ = ?));",
         "ssssssi", 
         [$vorname, $nachname, $email, $passwort_hash, $adresse, $ort, $plz]
     );
@@ -70,21 +70,21 @@ function loginUser($email, $passwort): bool {
     $passwort = passwd_crypt($_POST['passwd']); // Passwort wird gehasht damit es mit dem hash der datenbank vergilchen werden kann
 
     $result = mysql_select(
-        "SELECT KNR, Vorname, Nachname, Email FROM Kunde WHERE Email=? AND Passwort=?;",
+        "SELECT BNR, Vorname, Nachname, Email FROM Benutzer WHERE Email=? AND Passwort=?;",
         "ss", array($email, $passwort)
     );
     $user = $result->fetch_array(MYSQLI_ASSOC);
     
     // Wenn der nutzer exestiert
-    if($result->num_rows > 0 && $user['KNR']){
+    if($result->num_rows > 0 && $user['BNR']){
         // querry variablen
         $sessionid = session_id();
-        $knr = $user['KNR'];
+        $BNR = $user['BNR'];
 
         $login = mysql_select(
-            "INSERT INTO `Login` (SessionId, Zeitstempel, KNR) VALUES (?, current_timestamp(), ?);",
+            "INSERT INTO `Login` (SessionId, Zeitstempel, BNR) VALUES (?, current_timestamp(), ?);",
             "si",
-            [$sessionid, $knr]
+            [$sessionid, $BNR]
         );
         
         if($login){
@@ -116,7 +116,7 @@ function getUserbySession(): array|false {
     $session_id = session_id();
     
     $result = mysql_select(
-        "SELECT k.KNR, k.Vorname, k.Nachname, k.Email, k.Adresse, o.PLZ, o.Ort FROM Kunde as k JOIN Login as l ON k.KNR = l.KNR JOIN Ort as o ON k.Ortid = o.Ortid WHERE l.SessionId = ?;",
+        "SELECT b.BNR, b.Vorname, b.Nachname, b.Email, b.Adresse, o.PLZ, o.Ort FROM Benutzer as b JOIN Login as l ON b.BNR = b.BNR JOIN Ort as o ON b.Ortid = o.Ortid WHERE l.SessionId = ?;",
         "s",
         [$session_id]
     );
