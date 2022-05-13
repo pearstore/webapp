@@ -68,7 +68,7 @@ INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((Select A
 INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((Select AArtid FROM Artikel_Art WHERE AArt_Name = "GPU"), 3000, "Dies ist eine Extrem Goldene GPU", "Nvidia Titan V", 3);
 INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((Select AArtid FROM Artikel_Art WHERE AArt_Name = "GPU"), 6072, "Dies ist eine Shiny GPU", "Nvidia Quadro RTX 8000", 2);
 INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((Select AArtid FROM Artikel_Art WHERE AArt_Name = "GPU"), 950, "Dies ist eine GPU", "AMD Radeon Rx 6800", 9);
-INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "RAM"), 1285, "128GB PowerEdge C6520 C-Serie Arbeitsspeicher - RAM 2933MHz", "ECC", 60);
+INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "RAM"), 285, "VENGEANCE® RGB 32 GB (4 x 8 GB) DDR4 DRAM 4.000 MHz - RAM 4000MHz", "Corsair VENGEANCE Arbeitsspeicher 4x8GB", 25);
 
 # Ort
 INSERT INTO Ort (PLZ,Ort) VALUES (70565,"Stuttgart");
