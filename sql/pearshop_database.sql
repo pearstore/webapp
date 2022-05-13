@@ -69,9 +69,12 @@ INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((Select A
 INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((Select AArtid FROM Artikel_Art WHERE AArt_Name = "GPU"), 6072, "Dies ist eine Shiny GPU", "Nvidia Quadro RTX 8000", 2);
 INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((Select AArtid FROM Artikel_Art WHERE AArt_Name = "GPU"), 950, "Dies ist eine GPU", "AMD Radeon Rx 6800", 9);
 <<<<<<< HEAD
+<<<<<<< HEAD
 INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "RAM"), 1285, "128GB PowerEdge C6520 C-Serie Arbeitsspeicher - RAM 2933MHz", "ECC", 60);
 INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "CPU"), 500, 'Dies ist eine CPU', 'AMD AM4 Ryzen 9 5950X', 20);
 =======
+=======
+>>>>>>> 959df9d86dc2aaff98e1c05869aec64e0899d575
 INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "RAM"), 285, "VENGEANCE® RGB 32 GB (4 x 8 GB) DDR4 DRAM 4.000 MHz - RAM 4000MHz", "Corsair VENGEANCE Arbeitsspeicher 4x8GB", 25);
 
 >>>>>>> 959df9d86dc2aaff98e1c05869aec64e0899d575
