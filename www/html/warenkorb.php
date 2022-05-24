@@ -10,14 +10,18 @@ if(isset($_COOKIE['warenkorb'])) {
 }
 if(isset($_GET['anr'])) {
     $anr = (int) $_GET['anr'];
+	$artikel = getArtikelByAnr($anr);
     if(!isset($warenkorb[$anr])){
         $warenkorb[$anr] = 0;
     }
     if(isset($_GET['add'])) {
         $add = (int) $_GET['add'];
-        $warenkorb[$anr] = $warenkorb[$anr] + $add;
+		if($warenkorb[$anr] + $add <= $artikel["Menge"]){
+          $warenkorb[$anr] = $warenkorb[$anr] + $add;
+		}
+		
     } elseif(isset($_GET['rm'])) {
-        $rm = (int) $_GET['add'];
+        $rm = (int) $_GET['rm'];
         $warenkorb[$anr] = $warenkorb[$anr] - $rm;
     } elseif(isset($_GET['set'])) {
         $set = (int) $_GET['set'];

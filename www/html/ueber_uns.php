@@ -17,7 +17,11 @@ require_once('_global.php');
     <?php require_once("navbar.php"); ?>
 
     <!-- text... -->
-
+	<h1> Über Uns</h1>
+	<h2> Lorem Ipsum</h2>
+	
+	<p>Wir sind ein kleiner Online-Shop für Special Interest IT-Komponenten.<br>
+        Wir freuen uns auf ihre Bestellung !</p>
     <!-- wichtig -->
         <script src="/assets/js/bootstrap.bundle.min.js"></script>
         <script src="/assets/js/vue.js"></script>
