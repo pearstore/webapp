@@ -12,7 +12,6 @@ require_once('_global.php');
     <link rel="icon" type="image/png" href="/assets/pictures/icon/icon.png">
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/styles.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 </head>
 <body>
     <?php require_once("navbar.php"); ?>
