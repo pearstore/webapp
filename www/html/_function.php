@@ -70,21 +70,19 @@ function loginUser($email, $passwort): bool {
     $passwort = passwd_crypt($_POST['passwd']); // Passwort wird gehasht damit es mit dem hash der datenbank vergilchen werden kann
 
     $result = mysql_select(
-        "SELECT BNR, Vorname, Nachname, Email FROM Benutzer WHERE Email=? AND Passwort=?;",
+        "SELECT BNR FROM Benutzer WHERE Email=? AND Passwort=?;",
         "ss", array($email, $passwort)
     );
-    $user = $result->fetch_array(MYSQLI_ASSOC);
     
     // Wenn der nutzer exestiert
-    if($result->num_rows > 0 && $user['BNR']){
+    if($result->num_rows > 0){
         // querry variablen
         $sessionid = session_id();
-        $BNR = $user['BNR'];
 
         $login = mysql_select(
-            "INSERT INTO `Login` (SessionId, Zeitstempel, BNR) VALUES (?, current_timestamp(), ?);",
-            "si",
-            [$sessionid, $BNR]
+            "INSERT INTO `Login` (SessionId, Zeitstempel, BNR) VALUES (?, current_timestamp(), (SELECT BNR FROM Benutzer WHERE Email=? AND Passwort=?));",
+            "sss",
+            [$sessionid, $email, $passwort]
         );
         
         if($login){
@@ -116,7 +114,7 @@ function getUserbySession(): array|false {
     $session_id = session_id();
     
     $result = mysql_select(
-        "SELECT b.BNR, b.Vorname, b.Nachname, b.Email, b.Adresse, o.PLZ, o.Ort FROM Benutzer as b JOIN Login as l ON b.BNR = b.BNR JOIN Ort as o ON b.Ortid = o.Ortid WHERE l.SessionId = ?;",
+        "SELECT b.BNR, b.Vorname, b.Nachname, b.Email, b.Adresse, o.PLZ, o.Ort FROM Benutzer as b JOIN `Login` as l ON l.BNR = b.BNR JOIN Ort as o ON b.Ortid = o.Ortid WHERE l.SessionId = ?;",
         "s",
         [$session_id]
     );
