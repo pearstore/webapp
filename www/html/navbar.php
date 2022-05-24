@@ -4,7 +4,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container" id="navbarToggleExternalContent">
           <a class="navbar-brand" href="/">
-            <img src="/assets/pictures/icon/Pear.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
+            <img src="/assets/pictures/icon/Pear.png" width="30" height="30" class="d-inline-block align-top" alt="">
             Pearstore
           </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
