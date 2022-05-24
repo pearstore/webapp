@@ -96,6 +96,7 @@ foreach($warenkorb as $anr => $count){
     </div>
 
     <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/vue.js"></script>
     <script>
         new bootstrap.Modal(document.getElementById('loginModal'));
     </script>
