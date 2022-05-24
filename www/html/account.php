@@ -15,7 +15,7 @@ require_once('_global.php');
 
 <body class="bg-white bg-gradient">
     <?php require_once("navbar.php"); ?>
-    <div class="container">
+    <div class="container pt-5">
         <div class="row">
             <?php if($_USER == False): ?>
                 <div class="alert alert-danger d-flex align-items-center pt-2" role="alert">
