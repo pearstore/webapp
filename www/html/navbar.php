@@ -38,13 +38,25 @@
                         </ul>
                     </form>
                 <?php else: ?>
-                    <div class="btn-group mx-1" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#loginModal">
-                        Login
-                    </button>
-                    <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#registerModal">
-                        Register
-                    </button>
+                    <!--div class="btn-group mx-1" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#loginModal">
+                            Login
+                        </button>
+                        <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#registerModal">
+                            Register
+                        </button>
+                    </div-->
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+                        <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" id="dropdownMenuReference" data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="parent">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu text-small dropdown-menu-end dropdown-menu-dark bg-dark border-light" aria-labelledby="dropdownMenuReference">
+                            <li data-bs-toggle="modal" data-bs-target="#registerModal"><a class="dropdown-item" href="">Register</a></li>
+                            <li><a class="dropdown-item" href="/warenkorb.php">Warenkorb</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#"></a></li>
+                        </ul>
                     </div>
                 <?php endif; ?>
             </div>
@@ -169,10 +181,8 @@
     <!-- Alerts -->
     <?php if (isset($loginSuccess) && $loginSuccess == True): ?>
         <div class="container my-3">
-            <div class="alert alert-success d-flex align-items-center pt-2" role="alert">
-                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
-                <div>Login Erfogreich!</div>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <div class="alert alert-success" role="alert">
+                Login Erfogreich!
             </div>
         </div>
     <?php elseif (isset($loginSuccess) && $loginSuccess == False): ?>
