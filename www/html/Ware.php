@@ -64,7 +64,9 @@ $artikelListe = mysql_select(
                                         <img src="\assets\pictures\<?= $artikel['Name'] ?>.jpg" class="card-img border-0 my-auto px-1" alt="">
                                     </div>
                                     <div class="col-sm-8">
-                                        
+                                    <div class="text-center">           
+                                    <?= $artikel['Beschreibung'] ?>     <!--gibt die jeweilige Beschreibung der Produkte aus -->
+                                  </div>
                                     </div>
                                 </div>
                             </div>
