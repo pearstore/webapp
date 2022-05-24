@@ -52,7 +52,7 @@
                             <span class="visually-hidden">Toggle Dropdown</span>
                         </button>
                         <ul class="dropdown-menu text-small dropdown-menu-end dropdown-menu-dark bg-dark border-light" aria-labelledby="dropdownMenuReference">
-                            <li data-bs-toggle="modal" data-bs-target="#registerModal"><a class="dropdown-item" href="">Register</a></li>
+                            <li data-bs-toggle="modal" data-bs-target="#registerModal"><a class="dropdown-item">Register</a></li>
                             <li><a class="dropdown-item" href="/warenkorb.php">Warenkorb</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#"></a></li>
