@@ -49,56 +49,49 @@ foreach($warenkorb as $anr => $count){
 
 <body>
     <?php require_once("navbar.php"); ?>
-    <div class="container">
+    <div class="container pt-5">
         <div class="row">
-            <?php if($_USER == False): ?>
-                <div class="alert alert-danger d-flex align-items-center pt-2" role="alert">
-                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                    <div>Bitte anmelden!</div>
+            <div class="card px-0">
+                <h4 class="card-header">
+                    Warenkorb
+                </h4>
+                <table class="table table-striped table-hover card-body m-0">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="col-1">Pos</th>
+                            <th scope="col" class="col-auto">ANR</th>
+                            <th scope="col" class="col-auto">Produkt</th>
+                            <th scope="col" class="col-1 text-end">Stück</th>
+                            <th scope="col" class="col-2 text-end">Einzel</th>
+                            <th scope="col" class="col-2 text-end">Gesamt</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $gesPreis = 0; ?>
+                        <?php foreach($warenkorbArtikel as $pos => $artikel): ?>
+                        <tr>
+                            <th scope="row"><?= $pos+1 ?></th>
+                            <td><?= $artikel['Anr'] ?></td>
+                            <td><?= $artikel['Name'] ?></td>
+                            <td class="text-end">
+                                <input type="number" id="tentacles" name="tentacles"
+                                min="1" max="10" value="<?= $artikel['count'] ?>"></td>
+                            <td class="text-end"><?= number_format($artikel['Preis'], 2, ',', ' ') ?> €</td>
+                            <td class="text-end"><?= number_format(($artikel['Preis'] * $artikel['count']), 2, ',', ' ') ?> €</td>
+                        </tr>
+                        <?php $gesPreis += $artikel['Preis'] * $artikel['count']; ?>
+                        <?php endforeach; ?>
+                        <tr>
+                            <th scope="row"colspan="5"></th></th>
+                            <td class="text-end"><b><?= number_format($gesPreis, 2, ',', ' ') ?> €</b></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="card-body p-4">
+                    <p class="card-text">Bestellung der Artikel:</p>
+                    <a href="#" class="btn btn-primary">Kaufen</a>
                 </div>
-            <?php else: ?>
-                <div class="card px-0">
-                    <h4 class="card-header">
-                        Warenkorb
-                    </h4>
-                    <table class="table table-striped table-hover card-body m-0">
-                        <thead>
-                            <tr>
-                                <th scope="col" class="col-1">Pos</th>
-                                <th scope="col" class="col-auto">ANR</th>
-                                <th scope="col" class="col-auto">Produkt</th>
-                                <th scope="col" class="col-1 text-end">Stück</th>
-                                <th scope="col" class="col-2 text-end">Einzel</th>
-                                <th scope="col" class="col-2 text-end">Gesamt</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php $gesPreis = 0; ?>
-                            <?php foreach($warenkorbArtikel as $pos => $artikel): ?>
-                            <tr>
-                                <th scope="row"><?= $pos+1 ?></th>
-                                <td><?= $artikel['Anr'] ?></td>
-                                <td><?= $artikel['Name'] ?></td>
-                                <td class="text-end">
-                                  <input type="number" id="tentacles" name="tentacles"
-                                  min="1" max="10" value="<?= $artikel['count'] ?>"></td>
-                                <td class="text-end"><?= number_format($artikel['Preis'], 2, ',', ' ') ?> €</td>
-                                <td class="text-end"><?= number_format(($artikel['Preis'] * $artikel['count']), 2, ',', ' ') ?> €</td>
-                            </tr>
-                            <?php $gesPreis += $artikel['Preis'] * $artikel['count']; ?>
-                            <?php endforeach; ?>
-                            <tr>
-                                <th scope="row"colspan="5"></th></th>
-                                <td class="text-end"><b><?= number_format($gesPreis, 2, ',', ' ') ?> €</b></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="card-body p-4">
-                        <p class="card-text">Bestellung der Artikel:</p>
-                        <a href="#" class="btn btn-primary">Kaufen</a>
-                    </div>
-                </div>
-            <?php endif; ?>
+            </div>
         </div>
     </div>
 
