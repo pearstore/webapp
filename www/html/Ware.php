@@ -74,7 +74,11 @@ $artikelListe = mysql_select(
                                 <input type="hidden" name="anr" value="<?= $artikel['Anr'] ?>">
                                 <input type="hidden" name="add" value="1">
 
-                                <button class="btn btn-success btn-sm">Hinzufügen</button>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="menge" aria-describedby="button-addon2" id="txt-artikel<?= $artikel['Anr'] ?>">
+                                    <button class="btn btn-outline-secondary" type="button" onclick="addEvent(event, <?= $artikel['Anr'] ?>);">Hinzufügen</button>
+                                </div>
+
                             </form>
                         </div>
                     </div>
@@ -86,8 +90,14 @@ $artikelListe = mysql_select(
 
     <script src="/assets/js/bootstrap.bundle.min.js"></script>
     <script src="/assets/js/vue.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         new bootstrap.Modal(document.getElementById('loginModal'));
+    </script>
+    <script>
+        function addEvent(event, anr){
+            $.get( "/api/warenkorb/add/"+anr+"/"+$( "#txt-artikel"+anr ).val() )
+        };
     </script>
 </body>
 
