@@ -65,8 +65,8 @@ foreach($warenkorb as $anr => $count){
                             <th scope="col" class="col-auto">ANR</th>
                             <th scope="col" class="col-auto">Produkt</th>
                             <th scope="col" class="col-1 text-end">Stück</th>
-                            <th scope="col" class="col-2 text-end">Einzel</th>
-                            <th scope="col" class="col-2 text-end">Gesamt</th>
+                            <th scope="col" class="col-2 text-end">Einzel (€)</th>
+                            <th scope="col" class="col-2 text-end">Gesamt (€)</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -77,10 +77,10 @@ foreach($warenkorb as $anr => $count){
                             <td><?= $artikel['Anr'] ?></td>
                             <td><?= $artikel['Name'] ?></td>
                             <td class="text-end">
-                                <input type="number" id="tentacles" name="tentacles"
-                                min="1" max="<?= $artikel['Menge'] ?>" value="<?= $artikel['count'] ?>"></td>
-                            <td class="text-end"><?= number_format($artikel['Preis'], 2, ',', ' ') ?> €</td>
-                            <td class="text-end"><?= number_format(($artikel['Preis'] * $artikel['count']), 2, ',', ' ') ?> €</td>
+                                <input type="number" id="txt-artikel<?= $artikel['Anr']; ?>" name="tentacles"
+                                min="1" max="<?= $artikel['Menge'] ?>" value="<?= $artikel['count'] ?>" onchange="editEvent(event, <?= $artikel['Anr']; ?>)"></td>
+                            <td class="text-end" id="td-einzel<?= $artikel['Anr']; ?>" value="<?= $artikel['Preis']; ?>"><?= number_format($artikel['Preis'], 2, ',', ' ') ?> €</td>
+                            <td class="text-end" id="td-gesamt<?= $artikel['Anr']; ?>"><?= number_format(($artikel['Preis'] * $artikel['count']), 2, ',', ' ') ?> €</td>
                         </tr>
                         <?php $gesPreis += $artikel['Preis'] * $artikel['count']; ?>
                         <?php endforeach; ?>
@@ -100,8 +100,19 @@ foreach($warenkorb as $anr => $count){
 
     <script src="/assets/js/bootstrap.bundle.min.js"></script>
     <script src="/assets/js/vue.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         new bootstrap.Modal(document.getElementById('loginModal'));
+    </script>
+    <script>
+        function editEvent(event, anr){
+            console.log($( "#txt-artikel"+anr ).val())
+            console.log($( "#td-einzel"+anr ).text())
+            console.log($( "#td-einzel"+anr ).attr('value'))
+            console.log($( "#td-gesamt"+anr ).text())
+            var a = parseInt($( "#txt-artikel"+anr ).val()) * parseInt($( "#td-einzel"+anr ).attr('value'));
+            $( "#td-gesamt"+anr ).text(a + ",00 €")
+        };
     </script>
 </body>
 </html>
