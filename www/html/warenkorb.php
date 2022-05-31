@@ -78,7 +78,7 @@ foreach($warenkorb as $anr => $count){
                             <td><?= $artikel['Name'] ?></td>
                             <td class="text-end">
                                 <input type="number" id="tentacles" name="tentacles"
-                                min="1" max="10" value="<?= $artikel['count'] ?>"></td>
+                                min="1" max="<?= $artikel['Menge'] ?>" value="<?= $artikel['count'] ?>"></td>
                             <td class="text-end"><?= number_format($artikel['Preis'], 2, ',', ' ') ?> €</td>
                             <td class="text-end"><?= number_format(($artikel['Preis'] * $artikel['count']), 2, ',', ' ') ?> €</td>
                         </tr>
