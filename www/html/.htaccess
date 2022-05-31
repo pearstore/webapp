@@ -1,0 +1,11 @@
+RewriteEngine On
+RewriteBase /
+
+<FilesMatch ".(htaccess|htpasswd|ini|phps|fla|psd|log|sh|cfg)$">
+	Order Allow,Deny
+	Deny from all
+</FilesMatch>
+
+RewriteRule ^api/warenkorb/get$						"_api/warenkorb_api.php?out=1" [QSA,L]
+RewriteRule ^api/warenkorb/json$					"_api/warenkorb_api.php?json=1" [QSA,L]
+RewriteRule ^api/warenkorb/(.*)/(.*)/(.*)$			"_api/warenkorb_api.php?type=$1&anr=$2&amount=$3" [QSA,L]
