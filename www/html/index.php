@@ -24,8 +24,16 @@ $result = mysqli_query($link,$sql);
 <body>
     <?php require_once("navbar.php"); ?>
     <div>
-        <h2>Willkommen bei Pear</h2>
+        <h1>Willkommen bei Pear, ihrem Besten shop für Hardware</h1>
     </div>
+    <br>
+    <br>
+    <br>
+    <div>
+      <h2>Dieser Webshop ist das Perfekte Projekt der Gruppe Bravo und wird daher mit der Note: 1 bewertet.</h2>
+	  <img src="\assets\pictures\stiftung.jpg" width="200" height="200">
+    </div>
+
 	<?php require_once("cookie_popup.php"); ?>
     <script src="/assets/js/bootstrap.bundle.min.js"></script>
     <script>
