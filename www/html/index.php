@@ -31,6 +31,7 @@ $result = mysqli_query($link,$sql);
     <br>
     <div>
       <h2>Dieser Webshop ist das Perfekte Projekt der Gruppe Bravo und wird daher mit der Note: 1 bewertet.</h2>
+	  <img src="\assets\pictures\stiftung.jpg" width="200" height="200">
     </div>
 
 	<?php require_once("cookie_popup.php"); ?>
