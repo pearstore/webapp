@@ -26,6 +26,9 @@ $result = mysqli_query($link,$sql);
     <div>
         <h2>Willkommen bei Pear</h2>
     </div>
+    <div>
+      <h1>Dieser Webshop ist das Projekt der Gruppe Bravo</h1>
+    </div>
 	<?php require_once("cookie_popup.php"); ?>
     <script src="/assets/js/bootstrap.bundle.min.js"></script>
     <script>
