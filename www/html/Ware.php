@@ -70,13 +70,13 @@ $artikelListe = mysql_select(
                                     </div>
                                 </div>
                             </div>
-                            <form action="warenkorb.php" method="get" class="modal-footer">
+                            <form action="addtocart.php" method="get" class="modal-footer">
                                 <input type="hidden" name="anr" value="<?= $artikel['Anr'] ?>">
                                 <input type="hidden" name="add" value="1">
 
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="menge" aria-describedby="button-addon2" id="txt-artikel<?= $artikel['Anr'] ?>">
-                                    <button class="btn btn-outline-secondary" type="button" onclick="addEvent(event, <?= $artikel['Anr'] ?>);">Hinzufügen</button>
+                                    <input type="text" class="form-control" placeholder="menge" aria-describedby="button-addon2" name="add" id="txt-artikel<?= $artikel['Anr'] ?>">
+                                    <button class="btn btn-outline-secondary" type="submit" >Hinzufügen</button> <?php /* onclick="addEvent(event, <?= $artikel['Anr'] ?>);" */ ?>
                                 </div>
 
                             </form>
@@ -93,11 +93,6 @@ $artikelListe = mysql_select(
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         new bootstrap.Modal(document.getElementById('loginModal'));
-    </script>
-    <script>
-        function addEvent(event, anr){
-            $.get( "/api/warenkorb/add/"+anr+"/"+$( "#txt-artikel"+anr ).val() )
-        };
     </script>
 </body>
 

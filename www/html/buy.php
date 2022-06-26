@@ -32,7 +32,8 @@ foreach($warenkorb as $anr => $count){
     <?php require_once("navbar.php"); ?>
     <div class="container pt-5">
         <div class="row">
-            <div class="card px-0">
+            <?php if(getUserbySession() != False): ?>
+            <div class="card px-0 mb-4">
                 <h4 class="card-header">
                     Warenkorb
                 </h4>
@@ -54,11 +55,9 @@ foreach($warenkorb as $anr => $count){
                             <th scope="row"><?= $pos+1 ?></th>
                             <td><?= $artikel['Anr'] ?></td>
                             <td><?= $artikel['Name'] ?></td>
-                            <td class="text-end">
-                                <input type="number" class="form-control form-control-sm" id="txt-artikel<?= $artikel['Anr']; ?>" name="tentacles"
-                                min="1" max="<?= $artikel['Menge'] ?>" value="<?= $artikel['count'] ?>" onchange="editEvent(event, <?= $artikel['Anr']; ?>)"></td>
-                            <td class="text-end" id="td-einzel<?= $artikel['Anr']; ?>" value="<?= $artikel['Preis']; ?>"><?= number_format($artikel['Preis'], 2, ',', '.') ?> €</td>
-                            <td class="text-end" id="td-gesamt<?= $artikel['Anr']; ?>"><?= number_format(($artikel['Preis'] * $artikel['count']), 2, ',', '.') ?> €</td>
+                            <td class="text-end"><?= $artikel['count'] ?></td>
+                            <td class="text-end"><?= number_format($artikel['Preis'], 2, ',', '.') ?> €</td>
+                            <td class="text-end"><?= number_format(($artikel['Preis'] * $artikel['count']), 2, ',', '.') ?> €</td>
                         </tr>
                         <?php $gesPreis += $artikel['Preis'] * $artikel['count']; ?>
                         <?php endforeach; ?>
@@ -68,16 +67,30 @@ foreach($warenkorb as $anr => $count){
                         </tr>
                     </tbody>
                 </table>
-                <div class="card-body p-4">
-                    <?php if(getUserbySession() != False): ?>
-                        <p class="card-text">Bestellung der Artikel:</p>
-                        <a href="/buy.php" class="btn btn-primary">Kaufen</a>
-                    <?php else: ?>
-                        <p class="card-text">Bitte vor der Bestellung anmelden:</p>
-                        <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
-                    <?php endif; ?>
-                </div>
             </div>
+            <div class="card px-0 mb-4">
+                <h4 class="card-header">
+                    Kreditkarte
+                </h4>
+                <form class="card-body m-0">
+                    <div class="mb-3">
+                        <label for="kkn" class="form-label">Kreditkartennummer</label>
+                        <input type="text" class="form-control" id="kkn">
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label for="pz" class="form-label">Prüfziffer</label>
+                            <input type="text" class="form-control" id="pz">
+                        </div>
+                        <div class="col">
+                            <label for="ad" class="form-label">Ablaufdatum</label>
+                            <input type="date" class="form-control" id="ad">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <?php endif; ?>
         </div>
     </div>
 
@@ -86,13 +99,6 @@ foreach($warenkorb as $anr => $count){
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         new bootstrap.Modal(document.getElementById('loginModal'));
-    </script>
-    <script>
-        function editEvent(event, anr){
-            var menge = parseInt($( "#txt-artikel"+anr ).val()) * parseInt($( "#td-einzel"+anr ).attr('value'));
-            $( "#td-gesamt"+anr ).text(menge.toLocaleString('de-DE') + ",00 €")
-            $.get( "/api/warenkorb/set/"+anr+"/"+$( "#txt-artikel"+anr ).val());
-        };
     </script>
 </body>
 </html>
