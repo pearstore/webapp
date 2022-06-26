@@ -63,15 +63,6 @@ INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((SELECT A
 INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "GPU"), 780, 'NVIDIA GeForce RTX 3070 Ti Founders Edition <br> Speichergröße: 8GB <br>  Speichergeschwindigkeit: GDDR6X <br> Anschlüsse: HDMI, 3x DP', 'Nvidia Geforce RTX3070Ti', 7);
 INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "CPU"), 285, 'Intel Core i7-9700K Prozessor <br> Anzahl der Kerne: 8 <br> Max. Turbo-Taktfrequenz: 4.90 GHz <br> Bus-Taktfrequenz: 8GT/s ', 'Intel Core i7 9700k', 10);
 INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "RAM"), 35,  'Kingston FURY Beast 8GB DDR4-3200 Mhz',	'Kingston Arbeitsspeicher 8GB', 60);
-<<<<<<< Updated upstream
-INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "CPU"), 330, "Dies ist eine CPU", "AMD Ryzen 7 3700X", 50);
-INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((Select AArtid FROM Artikel_Art WHERE AArt_Name = "GPU"), 3000, "Dies ist eine Goldene GPU", "Nvidia Titan RTX", 10);
-INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((Select AArtid FROM Artikel_Art WHERE AArt_Name = "GPU"), 3000, "Dies ist eine Extrem Goldene GPU", "Nvidia Titan V", 3);
-INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((Select AArtid FROM Artikel_Art WHERE AArt_Name = "GPU"), 6072, "Dies ist eine Shiny GPU", "Nvidia Quadro RTX 8000", 2);
-INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((Select AArtid FROM Artikel_Art WHERE AArt_Name = "GPU"), 950, "Dies ist eine GPU", "AMD Radeon Rx 6800", 9);
-INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "RAM"), 1285, "128GB PowerEdge C6520 C-Serie Arbeitsspeicher <br> - RAM 2933MHz, <br> ECC", 60);
-INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "CPU"), 500, 'Dies ist eine CPU', 'AMD AM4 Ryzen 9 5950X', 20);
-=======
 INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "CPU"), 330, "AMD Tyzen 7 3700X <br> Anzahl der CPU-Kerne: 8 <br> Anzahl der Threads: 16 <br> Basistaktrate: 3.60GHz  ", "AMD Ryzen 7 3700X", 50);
 INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((Select AArtid FROM Artikel_Art WHERE AArt_Name = "GPU"), 3000, "NVIDIA Titan RTX <br> Basistakt der GPU: 1.350MHz <br> Grafikspeicher: 24KB GDDR6 <br> Speichertakt: 7.000MHz ", "Nvidia Titan RTX", 10);
 INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((Select AArtid FROM Artikel_Art WHERE AArt_Name = "GPU"), 3000, "NVIDIA TITAN V Volta <br> RAM-Größe: 12280MB <br> Anschlüsse: 3x DP, 1xHDMI <br> ", "Nvidia Titan V", 3);
@@ -79,7 +70,6 @@ INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((Select A
 INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((Select AArtid FROM Artikel_Art WHERE AArt_Name = "GPU"), 950, "Radeon RX 6800 Gaming <br> Max. Speichergröße: 16 GB <br> Speichertyp: GDDR6 <br> Max. Speicherbandbreite: Bis zu 512 GB/s", "AMD Radeon Rx 6800", 9);
 INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "RAM"), 1285, "128GB PowerEdge C6520 C-Serie Arbeitsspeicher - RAM 2933MHz", "ECC", 60);
 INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "CPU"), 500, 'AMD Ryzen 9 5950X <br> Anzahl der CPU Kerne: 16x <br> Max. Turbotakt: 4.90GHz <br>  Prozessortakt: 3.40GHz', 'AMD AM4 Ryzen 9 5950X', 20);
->>>>>>> Stashed changes
 INSERT INTO Artikel (AArtid, Preis, Beschreibung, Name, Menge) VALUES ((SELECT AArtid FROM Artikel_Art WHERE AArt_Name = "RAM"), 285, " Corsair VENGEANCE Arbeitsspeicher RGB <br> 32 GB (4 x 8 GB) <br> DDR4 DRAM 4.000 MHz", "Corsair VENGEANCE Arbeitsspeicher 4x8GB", 25);
 
 
