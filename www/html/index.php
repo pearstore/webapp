@@ -24,7 +24,7 @@ $result = mysqli_query($link,$sql);
 <body>
     <?php require_once("navbar.php"); ?>
     <div>
-        <h1>Willkommen bei Pear, ihrer Besten shop für Hardware</h1>
+        <h1>Willkommen bei Pear, ihrem Besten shop für Hardware</h1>
     </div>
     <br>
     <br>
@@ -32,14 +32,7 @@ $result = mysqli_query($link,$sql);
     <div>
       <h2>Dieser Webshop ist das Perfekte Projekt der Gruppe Bravo und wird daher mit der Note: 1 bewertet.</h2>
     </div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-      <h3>Stifftung Minov-Borgert-Test sagt: sehr gut<h3>
+
 	<?php require_once("cookie_popup.php"); ?>
     <script src="/assets/js/bootstrap.bundle.min.js"></script>
     <script>
