@@ -8,7 +8,7 @@ if (isset($_GET['name'])) {
 } else {
     $find_name = "%";
 }
-$artikelListe = mysql_select(
+$artikelListe = mysql_execute(
     "SELECT Anr, AArtid, Preis, `Name`, Beschreibung, Menge FROM Artikel WHERE `Name` LIKE ?;",
     "s",
     [$find_name]

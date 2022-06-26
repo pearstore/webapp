@@ -8,8 +8,8 @@ $menge = (int) $_GET['add'];
 
 $warenkorb = [];
 if(isset($_COOKIE['warenkorb'])) {
-    $compressedJSON = $_COOKIE['warenkorb'];
-    $warenkorb = json_decode(gzinflate($compressedJSON), True);
+    $JSON = $_COOKIE['warenkorb'];
+    $warenkorb = json_decode($JSON, True);
 }
 if(isset($_GET['anr'])) {
     if(!isset($warenkorb[$anr])){
@@ -28,8 +28,8 @@ if(isset($_GET['anr'])) {
         $set = (int) $_GET['set'];
         $warenkorb[$anr] = $set;
     }
-    $compressedJSON = gzdeflate(json_encode($warenkorb), 9);
-    setcookie('warenkorb', $compressedJSON, time()+36000);
+    $JSON = json_encode($warenkorb);
+    setcookie('warenkorb', $JSON, time()+36000, "/");
 }
 ?>
 
