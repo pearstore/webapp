@@ -15,17 +15,17 @@ foreach($warenkorb as $anr => $count){
     $artikel['count'] = $count;
     array_push($warenkorbArtikel, $artikel);
 }
+
 $USER = getUserbySession();
 
 $orderSuccess = False;
 
 if($USER && count($warenkorb) > 0) {
     if(isset($_POST["kkn"]) && isset($_POST["pz"]) && isset($_POST["ad"]) ){
-        $orderSuccess = insertOrder($USER['BNR'], [1,2,3]);
+        $orderSuccess = insertOrder($USER['BNR'], $warenkorb);
         setcookie('warenkorb', json_encode([]), time()+36000, "/");
     }
 }
-
 
 
 ?>
@@ -103,6 +103,15 @@ if($USER && count($warenkorb) > 0) {
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
+                    </div>
+                <?php else: ?>
+                    <div class="card px-0 mb-4">
+                        <h4 class="card-header">
+                            Kreditkarte
+                        </h4>
+                        <div>
+
+                        </div>
                     </div>
                 <?php endif; // $orderSuccess ?>
             <?php endif; // $USER?>

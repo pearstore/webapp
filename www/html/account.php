@@ -12,6 +12,24 @@ require_once('_global.php');
     <link rel="stylesheet" href="/assets/css/styles.css">
 </head>
 
+<?php 
+$result = mysql_execute("SELECT * FROM Bestpos bp JOIN Bestellung b ON bp.BID = b.BID WHERE BNR = ?;", "i", [1]);
+$DATA = $result->fetch_all(MYSQLI_ASSOC);
+
+$bestellungen = [];
+foreach($DATA as $d) {
+    if(!isset($bestellungen[$d["BID"]])){
+        $bestellungen[$d["BID"]] = [];
+    }
+    $artikel = getArtikelByAnr($d["Anr"]);
+    $artikel["BestNr"] = $d["BestNr"];
+    $artikel['Menge'] = $d["Menge"];
+    $artikel['BID'] = $d["BID"];
+    array_push($bestellungen[$d["BID"]], $artikel);
+}
+
+?>
+
 <body class="bg-white bg-gradient">
     <?php require_once("navbar.php"); ?>
     <div class="container pt-5">
@@ -50,14 +68,16 @@ require_once('_global.php');
                     </div>
                 </div>
                 <div class="col-8">
-                    <div class="card">
+                    <?php foreach($bestellungen as $bestellung): ?>
+                    <div class="card mb-3">
                         <h4 class="card-header">
-                            Bestellung #1
+                            Bestellung #<?= $bestellung[0]['BID'] ?> 
                         </h4>
                         <table class="table table-striped table-hover card-body p-0 m-0">
                             <thead>
                                 <tr>
                                     <th scope="col" class="col-1">Pos</th>
+                                    <th scope="col" class="col-1">ANR</th>
                                     <th scope="col" class="col-auto">Produkt</th>
                                     <th scope="col" class="col-1">Stück</th>
                                     <th scope="col" class="col-2">Einzel(€)</th>
@@ -65,38 +85,26 @@ require_once('_global.php');
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php $summe = 0 ?>
+                                <?php foreach($bestellung as $artikel): ?>
+                                    <tr>
+                                        <th scope="row"><?= $artikel["BestNr"] ?></th>
+                                        <td><?= $artikel["Anr"] ?></td>
+                                        <td><?= $artikel['Name'] ?></td>
+                                        <td class="text-end"><?= $artikel['Menge'] ?></td>
+                                        <td class="text-end"><?= number_format($artikel['Preis'], 2, ',', '.') ?> €</td>
+                                        <td class="text-end"><?= number_format(($artikel['Preis'] * $artikel['Menge']), 2, ',', '.') ?> €</td>
+                                        <?php $summe = $summe + ($artikel['Preis'] * $artikel['Menge']) ?>
+                                    </tr>
+                                <?php endforeach; ?>
                                 <tr>
-                                    <th scope="row">1</th>
-                                    <td>test 1</td>
-                                    <td>2</td>
-                                    <td>75,00</td>
-                                    <td>150,00</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>test 2</td>
-                                    <td>1</td>
-                                    <td>100,00</td>
-                                    <td>100,00</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>test 3</td>
-                                    <td>5</td>
-                                    <td>10,00</td>
-                                    <td>50,00</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"colspan="4"></th></th>
-                                    <td><b>50,00</b></td>
+                                    <th scope="row"colspan="5"></th></th>
+                                    <td class="text-end"><b><?= number_format($summe, 2, ',', '.') ?></b></td>
                                 </tr>
                             </tbody>
                         </table>
-                        <div class="card-body p-4">
-                            <!--p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a-->
-                        </div>
                     </div>
+                    <?php endforeach; ?>
                 </div>
             <?php endif; ?>
         </div>

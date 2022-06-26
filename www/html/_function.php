@@ -158,11 +158,11 @@ function getArtikelByAnr(int $anr): array|false {
 
 function insertOrder(int $userId, array $besposList): bool {
     $lastID = mysql_insert_lastid("INSERT INTO Bestellung (BNR) VALUES (?);", "i", [$userId]);
-    foreach($besposList as $bespos){
+    foreach($besposList as $Anr => $Menge){
         mysql_execute(
-            "INSERT INTO Bestpos (BID, Anr) VALUES (?, ?);",
-            "ii",
-            [$lastID, $bespos]
+            "INSERT INTO Bestpos (BID, Anr, Menge) VALUES (?, ?, ?);",
+            "iii",
+            [$lastID, $Anr, $Menge]
         );
     }
     return True;
