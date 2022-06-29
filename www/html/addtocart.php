@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once('_function.php');
 require_once('_global.php');
 
@@ -20,7 +20,7 @@ if(isset($_GET['anr'])) {
 		if($warenkorb[$anr] + $add <= $artikel["Menge"]){
           $warenkorb[$anr] = $warenkorb[$anr] + $add;
 		}
-		
+
     } elseif(isset($_GET['rm'])) {
         $rm = (int) $_GET['rm'];
         $warenkorb[$anr] = $warenkorb[$anr] - $rm;
@@ -50,22 +50,22 @@ if(isset($_GET['anr'])) {
         <div class="row">
             <div class="card px-0">
                 <h4 class="card-header">
-                    Zu Warenkorb hizugefügt:
+                    Zu Warenkorb hinzugefügt:
                 </h4>
-                
+
                 <div class="card-body m-0 container">
                     <div class="row">
                         <div class="col-sm-4">
                             <img src="\assets\pictures\<?= $artikel['Name'] ?>.jpg" class="card-img border-0 my-auto px-1" alt="">
                         </div>
                         <div class="col-sm-8">
-                        <div class="text-center">           
+                        <div class="text-center">
                             Es wurden <?= $menge ?>x <?= $artikel['Name'] ?> zum Warenkorb hinzugefügt.
                         </div>
                         </div>
                     </div>
                 </div>
-                    
+
                 <div class="card-body p-4">
                     <p class="card-text">Wohin möchten Sie jetzt?</p>
                     <a href="/ware.php" class="btn btn-secondary">Zurück zur Ware</a>
