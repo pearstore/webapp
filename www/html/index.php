@@ -1,12 +1,6 @@
 <?php
 require_once('_function.php');
 require_once('_global.php');
-
-$link = mysqli_connect("pearshop_db","pearshop","itsstuttgart","pearstore_database");
-
-$sql = "SELECT Anr, AArtid, Preis, Name, Beschreibung FROM Artikel";
-
-$result = mysqli_query($link,$sql);
 ?>
 
 <!DOCTYPE html>
