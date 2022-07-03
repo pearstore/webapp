@@ -16,11 +16,9 @@ foreach($warenkorb as $anr => $count){
     array_push($warenkorbArtikel, $artikel);
 }
 
-$USER = getUserbySession();
-
 $orderSuccess = False;
 
-if($USER && count($warenkorb) > 0) {
+if($_USER && count($warenkorb) > 0) {
     if(isset($_POST["kkn"]) && isset($_POST["pz"]) && isset($_POST["ad"]) ){
         $orderSuccess = insertOrder($USER['BNR'], $warenkorb);
         setcookie('warenkorb', json_encode([]), time()+36000, "/");
