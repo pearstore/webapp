@@ -1,7 +1,15 @@
 <?php
+
+// Dises dukument enthält alle wichtigen funktionen der Webseite
+
 function mysql_execute(string $quary, string $var_types = NULL, array $var_array = NULL): mysqli_result|bool {
-    global $_DEBUG;
-    $_MYSQL_CONNECTION = mysqli_connect("pearshop_db","pearshop","itsstuttgart","pearstore_database");
+    /* Dies ist eine universelle funktion um MySQL (DML) Quarys auszuführen */
+    /* • Die funktion gibt True zurück wenn die Quary erfogreich ausgefüht wurde, aber kein wert duch die Quary ausgegeben wurde */
+    /* • Die funtion gibt alle duch die Quary ausgegebenen werte zurück */
+    /* • Bei einem Fehler gibt die funktion False zurück */
+
+    global $_MYSQL; // Übergibt die MySQL Nutzerdaten aus _global.php
+    $_MYSQL_CONNECTION = mysqli_connect($_MYSQL["HOST"],$_MYSQL["USER"],$_MYSQL["PASSWD"],$_MYSQL["DATABASE"], $_MYSQL["PORT"]);
     
     // mysql Query bauen und ausführen
     $stmt = $_MYSQL_CONNECTION->prepare($quary);
@@ -23,8 +31,11 @@ function mysql_execute(string $quary, string $var_types = NULL, array $var_array
     }
 }
 function mysql_insert_lastid(string $quary, string $var_types = NULL, array $var_array = NULL): int {
-    global $_DEBUG;
-    $_MYSQL_CONNECTION = mysqli_connect("pearshop_db","pearshop","itsstuttgart","pearstore_database");
+    /* Mit funktion können insert query aus gefürt werden */
+    /* Zusätzlich gibt die letzte ID die mit Auto-Inkrement festgelegt worden ist zurück */
+
+    global $_MYSQL; // Übergibt die MySQL Nutzerdaten aus _global.php
+    $_MYSQL_CONNECTION = mysqli_connect($_MYSQL["HOST"],$_MYSQL["USER"],$_MYSQL["PASSWD"],$_MYSQL["DATABASE"], $_MYSQL["PORT"]);
 
     $stmt = $_MYSQL_CONNECTION->prepare($quary);
     if($var_types != NULL && $var_array != NULL){
@@ -32,6 +43,7 @@ function mysql_insert_lastid(string $quary, string $var_types = NULL, array $var
     }
     $execute = $stmt->execute();
 
+    // Holt die ID die von der vorher ausgefürten query erstellt wurde
     $last_id = mysqli_insert_id($_MYSQL_CONNECTION);
 
     return $last_id;
@@ -44,6 +56,7 @@ function passwd_crypt($password, $cost=11): string {
 }
 
 function createOrt(string $ort, int $plz): mysqli_result|bool {
+    /* Esrtellt einen Ort in der Datenbank */
     return mysql_execute(
         "INSERT INTO Ort (Ort, PLZ) VALUES (?, ?);",
         "si",
@@ -53,8 +66,7 @@ function createOrt(string $ort, int $plz): mysqli_result|bool {
 
 /* User Management */
 
-function registerUser(string $vorname, string $nachname, string $email, 
-                string $passwort, string $adresse, string $ort, int $plz): mysqli_result|bool {
+function registerUser(string $vorname, string $nachname, string $email, string $passwort, string $adresse, string $ort, int $plz): mysqli_result|bool {
     /* Erstellt einen neuen nutzer in der Datenbank*/
 
     $ort_result = mysql_execute(
@@ -91,7 +103,7 @@ function loginUser($email, $passwort): bool {
     
     // Wenn der nutzer exestiert
     if($result->num_rows > 0){
-        // querry variablen
+        /* querry variablen */
         $sessionid = session_id();
 
         $login = mysql_execute(
@@ -157,6 +169,7 @@ function getArtikelByAnr(int $anr): array|false {
 }
 
 function insertOrder(int $userId, array $besposList): bool {
+    /* Erstellt eine Bestellung mit Positionen */
     $lastID = mysql_insert_lastid("INSERT INTO Bestellung (BNR) VALUES (?);", "i", [$userId]);
     foreach($besposList as $Anr => $Menge){
         mysql_execute(
