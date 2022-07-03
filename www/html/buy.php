@@ -5,8 +5,8 @@ require_once('_global.php');
 
 $warenkorb = [];
 if(isset($_COOKIE['warenkorb'])) {
-    $compressedJSON = $_COOKIE['warenkorb'];
-    $warenkorb = json_decode(gzinflate($compressedJSON), True);
+    $JSON = $_COOKIE['warenkorb'];
+    $warenkorb = json_decode($JSON, True);
 }
 
 $warenkorbArtikel = [];
@@ -15,6 +15,17 @@ foreach($warenkorb as $anr => $count){
     $artikel['count'] = $count;
     array_push($warenkorbArtikel, $artikel);
 }
+
+$orderSuccess = False;
+
+if($_USER && count($warenkorb) > 0) {
+    if(isset($_POST["kkn"]) && isset($_POST["pz"]) && isset($_POST["ad"]) ){
+        $orderSuccess = insertOrder($USER['BNR'], $warenkorb);
+        setcookie('warenkorb', json_encode([]), time()+36000, "/");
+    }
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -32,65 +43,76 @@ foreach($warenkorb as $anr => $count){
     <?php require_once("navbar.php"); ?>
     <div class="container pt-5">
         <div class="row">
-            <?php if(getUserbySession() != False): ?>
-            <div class="card px-0 mb-4">
-                <h4 class="card-header">
-                    Warenkorb
-                </h4>
-                <table class="table table-striped table-hover card-body m-0">
-                    <thead>
-                        <tr>
-                            <th scope="col" class="col-1">Pos</th>
-                            <th scope="col" class="col-auto">ANR</th>
-                            <th scope="col" class="col-auto">Produkt</th>
-                            <th scope="col" class="col-1 text-end">Stück</th>
-                            <th scope="col" class="col-2 text-end">Einzel (€)</th>
-                            <th scope="col" class="col-2 text-end">Gesamt (€)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php $gesPreis = 0; ?>
-                        <?php foreach($warenkorbArtikel as $pos => $artikel): ?>
-                        <tr>
-                            <th scope="row"><?= $pos+1 ?></th>
-                            <td><?= $artikel['Anr'] ?></td>
-                            <td><?= $artikel['Name'] ?></td>
-                            <td class="text-end"><?= $artikel['count'] ?></td>
-                            <td class="text-end"><?= number_format($artikel['Preis'], 2, ',', '.') ?> €</td>
-                            <td class="text-end"><?= number_format(($artikel['Preis'] * $artikel['count']), 2, ',', '.') ?> €</td>
-                        </tr>
-                        <?php $gesPreis += $artikel['Preis'] * $artikel['count']; ?>
-                        <?php endforeach; ?>
-                        <tr>
-                            <th scope="row"colspan="5"></th></th>
-                            <td class="text-end"><b><?= number_format($gesPreis, 2, ',', '.') ?> €</b></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="card px-0 mb-4">
-                <h4 class="card-header">
-                    Kreditkarte
-                </h4>
-                <form class="card-body m-0">
-                    <div class="mb-3">
-                        <label for="kkn" class="form-label">Kreditkartennummer</label>
-                        <input type="text" class="form-control" id="kkn">
+            <?php if($USER != False): ?>
+                <div class="card px-0 mb-4">
+                    <h4 class="card-header">
+                        Warenkorb
+                    </h4>
+                    <table class="table table-striped table-hover card-body m-0">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="col-1">Pos</th>
+                                <th scope="col" class="col-auto">ANR</th>
+                                <th scope="col" class="col-auto">Produkt</th>
+                                <th scope="col" class="col-1 text-end">Stück</th>
+                                <th scope="col" class="col-2 text-end">Einzel (€)</th>
+                                <th scope="col" class="col-2 text-end">Gesamt (€)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php $gesPreis = 0; ?>
+                            <?php foreach($warenkorbArtikel as $pos => $artikel): ?>
+                            <tr>
+                                <th scope="row"><?= $pos+1 ?></th>
+                                <td><?= $artikel['Anr'] ?></td>
+                                <td><?= $artikel['Name'] ?></td>
+                                <td class="text-end"><?= $artikel['count'] ?></td>
+                                <td class="text-end"><?= number_format($artikel['Preis'], 2, ',', '.') ?> €</td>
+                                <td class="text-end"><?= number_format(($artikel['Preis'] * $artikel['count']), 2, ',', '.') ?> €</td>
+                            </tr>
+                            <?php $gesPreis += $artikel['Preis'] * $artikel['count']; ?>
+                            <?php endforeach; ?>
+                            <tr>
+                                <th scope="row"colspan="5"></th></th>
+                                <td class="text-end"><b><?= number_format($gesPreis, 2, ',', '.') ?> €</b></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <?php if($orderSuccess == False): ?>
+                    <div class="card px-0 mb-4">
+                        <h4 class="card-header">
+                            Kreditkarte
+                        </h4>
+                        <form class="card-body m-0" method="post">
+                            <div class="mb-3">
+                                <label for="kkn" class="form-label">Kreditkartennummer</label>
+                                <input type="text" name="kkn" class="form-control" id="kkn">
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label for="pz" class="form-label">Prüfziffer</label>
+                                    <input type="text" name="pz" class="form-control" id="pz">
+                                </div>
+                                <div class="col">
+                                    <label for="ad" class="form-label">Ablaufdatum</label>
+                                    <input type="date" name="ad" class="form-control" id="ad">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
                     </div>
-                    <div class="row mb-3">
-                        <div class="col">
-                            <label for="pz" class="form-label">Prüfziffer</label>
-                            <input type="text" class="form-control" id="pz">
-                        </div>
-                        <div class="col">
-                            <label for="ad" class="form-label">Ablaufdatum</label>
-                            <input type="date" class="form-control" id="ad">
+                <?php else: ?>
+                    <div class="card px-0 mb-4">
+                        <h4 class="card-header">
+                            Kreditkarte
+                        </h4>
+                        <div>
+
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
-            <?php endif; ?>
+                <?php endif; // $orderSuccess ?>
+            <?php endif; // $USER?>
         </div>
     </div>
 

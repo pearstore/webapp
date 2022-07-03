@@ -5,8 +5,8 @@ require_once('_global.php');
 
 $warenkorb = [];
 if(isset($_COOKIE['warenkorb'])) {
-    $compressedJSON = $_COOKIE['warenkorb'];
-    $warenkorb = json_decode(gzinflate($compressedJSON), True);
+    $JSON = $_COOKIE['warenkorb'];
+    $warenkorb = json_decode($JSON, True);
 }
 
 $warenkorbArtikel = [];

@@ -5,8 +5,8 @@ require_once('../_global.php');
 
 $warenkorb = [];
 if(isset($_COOKIE['warenkorb'])) {
-    $compressedJSON = $_COOKIE['warenkorb'];
-    $warenkorb = json_decode(gzinflate($compressedJSON), True);
+    $JSON = $_COOKIE['warenkorb'];
+    $warenkorb = json_decode($JSON, True);
     $nnn = $warenkorb;
 }
 if ( isset($_GET['out']) && $_GET['out'] == 1 ) {
@@ -50,8 +50,8 @@ if ( isset($_GET['out']) && $_GET['out'] == 1 ) {
             $warenkorb[$anr] = $amount;
         }
     }
-    $compressedJSON = gzdeflate(json_encode($warenkorb), 9);
-    setcookie('warenkorb', $compressedJSON, time()+36000, "/");
+    $JSON = json_encode($warenkorb);
+    setcookie('warenkorb', $JSON, time()+36000, "/");
 }
 print(json_encode($warenkorb));
 print(json_encode($_GET));
